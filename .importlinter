@@ -1,0 +1,25 @@
+[importlinter]
+root_package = apps
+include_external_packages = False
+
+# Feature apps never import each other; cross-app effects go through core.events.
+# Add every new feature app here.
+[importlinter:contract:feature-independence]
+name = Feature apps are independent
+type = independence
+modules =
+    apps.accounts
+
+# view -> form -> service -> repository -> model, inside each app.
+# Parentheses mark layers an app may not have yet. Add every new app to containers.
+[importlinter:contract:layers]
+name = Layered architecture inside each app
+type = layers
+layers =
+    (views)
+    (forms)
+    (services)
+    (repositories)
+    (models)
+containers =
+    apps.accounts

@@ -145,6 +145,7 @@ Signups, trial-to-paid %, MRR, churn, support hours per week, test coverage, CI 
 |---|---|---|
 | 2026-11-18 | cookiecutter-django skeleton (Python 3.14, Django 6.0, package `apps`); ruff/djlint swapped for black, isort, flake8; Makefile with `make check`; per-layer coverage gates; pre-commit; GitHub Actions CI (not yet run: no remote) | Claude Code guardrails item: `.importlinter`, day-one verification (ENFORCEMENT §9) |
 | 2026-11-18 | Early decisions applied: ATOMIC_REQUESTS off; `users` app renamed `accounts`; Bootstrap/crispy replaced by Tailwind (django-tailwind-cli, Tailwind 4.3.4 pinned), shared partials for fields, messages, buttons; WhiteNoise off in tests | Claude Code guardrails item; user to log decisions (allauth MFA, Tailwind CLI) in Decisions Log and ARCHITECTURE §2 |
+| 2026-11-18 | Guardrails: `.importlinter` (feature independence + layers, probed with a deliberate violation). Day-one checks: migration edit blocked ✅, .env read denied ✅, git push denied ✅, format hook ❌ (black not on PATH), Stop hook not wired (user decision) | User fixes format.py and wires Stop hook, then tick the guardrails box; next: Waitlist landing page / Phase 1 W1 core |
 
 ## Session Starter Prompt
 
