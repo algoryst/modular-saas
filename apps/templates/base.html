@@ -10,6 +10,9 @@
       {% tailwind_css %}
     {% endblock css %}
     {% block javascript %}
+      {# components.js registers Alpine components, so it must come before Alpine. #}
+      <script defer src="{% static 'js/components.js' %}"></script>
+      <script defer src="{% static 'js/vendor/alpine-csp-3.17.5.min.js' %}"></script>
     {% endblock javascript %}
   </head>
   <body class="h-full bg-zinc-50 font-sans text-zinc-900 antialiased {% block bodyclass %}{% endblock bodyclass %}"

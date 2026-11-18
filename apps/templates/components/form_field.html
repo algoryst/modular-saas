@@ -1,4 +1,5 @@
 {# One form field: label, widget, help text, errors. Expects `field` (a BoundField). #}
+{% load i18n %}
 {% if field.is_hidden %}
   {{ field }}
 {% else %}
@@ -11,7 +12,24 @@
     {% else %}
       <label for="{{ field.id_for_label }}"
              class="block text-sm font-medium text-zinc-700">{{ field.label }}</label>
-      {{ field }}
+      {% if field.widget_type == "password" %}
+        <div class="password-field relative" x-data="passwordToggle">
+          {{ field }}
+          {# x-cloak keeps the button hidden until Alpine runs, so it never shows dead. #}
+          <button type="button"
+                  class="absolute inset-y-0 right-0 flex items-center px-3 text-zinc-500 hover:text-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600/30"
+                  aria-label="{% translate 'Show password' %}"
+                  aria-controls="{{ field.id_for_label }}"
+                  x-bind:aria-pressed="pressed"
+                  x-on:click="toggle"
+                  x-cloak>
+            <span x-show="hidden">{% include "components/icon.html" with name="eye" %}</span>
+            <span x-show="shown">{% include "components/icon.html" with name="eye-off" %}</span>
+          </button>
+        </div>
+      {% else %}
+        {{ field }}
+      {% endif %}
     {% endif %}
     {# allow-safe: help_text is set in code (e.g. Django's password help lists), never by users. #}
     {% if field.help_text %}<p class="text-xs text-zinc-500">{{ field.help_text|safe }}</p>{% endif %}

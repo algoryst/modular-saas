@@ -19,8 +19,18 @@
     @apply block w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 focus:outline-none;
   }
 
+  /* Room for the show/hide button; the input flips between password and text. */
+  .form-field .password-field input {
+    @apply pr-10;
+  }
+
   .form-field input[type="checkbox"],
   .form-field input[type="radio"] {
     @apply size-4 border-zinc-300 text-blue-600 focus:ring-blue-600;
   }
+}
+
+/* Alpine removes x-cloak once it has initialised the element. */
+[x-cloak] {
+  display: none !important;
 }
