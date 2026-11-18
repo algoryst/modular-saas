@@ -26,9 +26,10 @@ DEBUG = env.bool("DJANGO_DEBUG", False)
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # though not all of them may be available with every OS.
 # In Windows, this must be set to your system time zone.
-TIME_ZONE = "UTC"
+# France first: show local time. Storage stays UTC (USE_TZ); W2 adds per-tenant zones.
+TIME_ZONE = "Europe/Paris"
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "en"
 # https://docs.djangoproject.com/en/dev/ref/settings/#languages
 # Without a choice, LocaleMiddleware negotiates from the browser's Accept-Language
 # and falls back to LANGUAGE_CODE. The switcher's set_language cookie overrides both.
@@ -38,6 +39,8 @@ LANGUAGES = [
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
+# Domain shown in emails ("...on <domain>"); set it per environment.
+SITE_DOMAIN = env("SITE_DOMAIN", default="localhost:8000")
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
 USE_I18N = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
@@ -161,6 +164,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "apps.accounts.middleware.UserLanguageMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",

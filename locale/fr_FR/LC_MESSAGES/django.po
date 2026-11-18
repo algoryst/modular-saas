@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-18 13:30+0000\n"
+"POT-Creation-Date: 2026-11-18 14:50+0100\n"
 "Language: fr-FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,35 +30,65 @@ msgstr "Dates importantes"
 msgid "Accounts"
 msgstr "Comptes"
 
-#: apps/accounts/forms.py:41 apps/accounts/tests/test_forms.py:41
+#: apps/accounts/forms.py:42 apps/accounts/tests/test_forms.py:41
 msgid "This email has already been taken."
 msgstr "Cette adresse e-mail est déjà utilisée."
 
-#: apps/accounts/forms.py:56
+#: apps/accounts/forms.py:57
 msgid "Email address"
 msgstr "Adresse e-mail"
 
-#: apps/accounts/forms.py:70
+#: apps/accounts/forms.py:71
 msgid "Avoid common or all-number passwords."
 msgstr "Évitez les mots de passe courants ou composés uniquement de chiffres."
 
-#: apps/accounts/forms.py:72
+#: apps/accounts/forms.py:73
 #, python-format
 msgid ""
 "At least %(min_length)d characters. Avoid common or all-number passwords."
-msgstr "Au moins %(min_length)d caractères. Évitez les mots de passe courants ou composés uniquement de chiffres."
+msgstr ""
+"Au moins %(min_length)d caractères. Évitez les mots de passe courants ou "
+"composés uniquement de chiffres."
 
-#: apps/accounts/models.py:19
+#: apps/accounts/models.py:20
 msgid "Name of User"
 msgstr "Nom de l'utilisateur"
 
-#: apps/accounts/models.py:22
+#: apps/accounts/models.py:23
 msgid "email address"
 msgstr "adresse e-mail"
 
-#: apps/accounts/tests/test_views.py:75 apps/accounts/views.py:29
+#: apps/accounts/models.py:27
+msgid "language"
+msgstr "langue"
+
+#: apps/accounts/tests/test_views.py:75 apps/accounts/views.py:35
 msgid "Information successfully updated"
 msgstr "Informations mises à jour avec succès"
+
+#: apps/core/apps.py:7
+msgid "Core"
+msgstr "Noyau"
+
+#: apps/core/models.py:22
+msgid "created at"
+msgstr "créé le"
+
+#: apps/core/models.py:23
+msgid "updated at"
+msgstr "modifié le"
+
+#: apps/core/models.py:38
+msgid "deleted at"
+msgstr "supprimé le"
+
+#: apps/core/models.py:64
+msgid "created by"
+msgstr "créé par"
+
+#: apps/core/models.py:77
+msgid "position"
+msgstr "position"
 
 #: apps/marketing/apps.py:7
 msgid "Marketing"
@@ -329,7 +359,9 @@ msgstr "Un instant, s'il vous plaît"
 msgid ""
 "You tried that several times in a short time. Wait a few seconds, then try "
 "again."
-msgstr "Vous avez essayé plusieurs fois en peu de temps. Patientez quelques secondes, puis réessayez."
+msgstr ""
+"Vous avez essayé plusieurs fois en peu de temps. Patientez quelques "
+"secondes, puis réessayez."
 
 #: apps/templates/429.html:11
 msgid "Try again"
@@ -348,7 +380,10 @@ msgstr "Nous avons été prévenus. Veuillez réessayer dans quelques minutes."
 msgid ""
 "We sent a code to <strong class=\"font-medium text-zinc-900\">%(recipient)s</"
 "strong>. Enter it below, it is only valid for a few minutes."
-msgstr "Nous avons envoyé un code à <strong class=\"font-medium text-zinc-900\">%(recipient)s</strong>. Saisissez-le ci-dessous, il n'est valable que quelques minutes."
+msgstr ""
+"Nous avons envoyé un code à <strong class=\"font-medium text-"
+"zinc-900\">%(recipient)s</strong>. Saisissez-le ci-dessous, il n'est valable "
+"que quelques minutes."
 
 #: apps/templates/account/base_confirm_code.html:24
 msgid "Confirm"
@@ -397,7 +432,9 @@ msgstr "Se connecter"
 msgid ""
 "New here? <a class=\"font-medium text-blue-600 hover:underline\" "
 "href=\"%(signup_url)s\">Create an account</a>"
-msgstr "Nouveau ici ? <a class=\"font-medium text-blue-600 hover:underline\" href=\"%(signup_url)s\">Créer un compte</a>"
+msgstr ""
+"Nouveau ici ? <a class=\"font-medium text-blue-600 hover:underline\" "
+"href=\"%(signup_url)s\">Créer un compte</a>"
 
 #: apps/templates/account/login.html:27
 msgid "or"
@@ -416,7 +453,9 @@ msgstr "Réinitialiser votre mot de passe"
 msgid ""
 "Enter your email address and we will send you a link to choose a new "
 "password."
-msgstr "Saisissez votre adresse e-mail et nous vous enverrons un lien pour choisir un nouveau mot de passe."
+msgstr ""
+"Saisissez votre adresse e-mail et nous vous enverrons un lien pour choisir "
+"un nouveau mot de passe."
 
 #: apps/templates/account/password_reset.html:20
 msgid "Send reset link"
@@ -427,13 +466,17 @@ msgstr "Envoyer le lien"
 msgid ""
 "Remembered it? <a class=\"font-medium text-blue-600 hover:underline\" "
 "href=\"%(login_url)s\">Sign in</a>"
-msgstr "Vous vous en souvenez ? <a class=\"font-medium text-blue-600 hover:underline\" href=\"%(login_url)s\">Se connecter</a>"
+msgstr ""
+"Vous vous en souvenez ? <a class=\"font-medium text-blue-600 hover:"
+"underline\" href=\"%(login_url)s\">Se connecter</a>"
 
 #: apps/templates/account/request_login_code.html:7
 msgid ""
 "Enter your email address and we will send you a one-time code. No password "
 "needed."
-msgstr "Saisissez votre adresse e-mail et nous vous enverrons un code à usage unique. Aucun mot de passe nécessaire."
+msgstr ""
+"Saisissez votre adresse e-mail et nous vous enverrons un code à usage "
+"unique. Aucun mot de passe nécessaire."
 
 #: apps/templates/account/request_login_code.html:16
 msgid "Send code"
@@ -456,7 +499,9 @@ msgstr "Créez votre compte"
 msgid ""
 "Already have an account? <a class=\"font-medium text-blue-600 hover:"
 "underline\" href=\"%(login_url)s\">Sign in</a>"
-msgstr "Vous avez déjà un compte ? <a class=\"font-medium text-blue-600 hover:underline\" href=\"%(login_url)s\">Se connecter</a>"
+msgstr ""
+"Vous avez déjà un compte ? <a class=\"font-medium text-blue-600 hover:"
+"underline\" href=\"%(login_url)s\">Se connecter</a>"
 
 #: apps/templates/account/signup.html:19 apps/templates/base.html:41
 msgid "Create account"
@@ -471,7 +516,9 @@ msgstr "Les inscriptions ouvrent bientôt"
 msgid ""
 "We are putting the finishing touches on the platform. Join the waitlist and "
 "we will email you as soon as you can create your account."
-msgstr "Nous mettons la dernière main à la plateforme. Rejoignez la liste d'attente et nous vous écrirons dès que vous pourrez créer votre compte."
+msgstr ""
+"Nous mettons la dernière main à la plateforme. Rejoignez la liste d'attente "
+"et nous vous écrirons dès que vous pourrez créer votre compte."
 
 #: apps/templates/account/signup_closed.html:10
 msgid "Go to the waitlist"
@@ -519,11 +566,11 @@ msgstr "Afficher le mot de passe"
 msgid "Language"
 msgstr "Langue"
 
-#: config/settings/base.py:36
+#: config/settings/base.py:37
 msgid "English"
 msgstr "Anglais"
 
-#: config/settings/base.py:37
+#: config/settings/base.py:38
 msgid "French"
 msgstr "Français"
 

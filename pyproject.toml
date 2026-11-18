@@ -152,3 +152,5 @@ python_files = [
 run.include = [ "apps/**" ]
 run.omit = [ "*/migrations/*", "*/tests/*" ]
 run.plugins = [ "django_coverage_plugin" ]
+# The template plugin needs the C tracer; Python 3.14 defaults to sys.monitoring.
+run.core = "ctrace"

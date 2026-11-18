@@ -38,7 +38,7 @@ Rule: work the first unchecked item. Tests with every item. Update the session l
 ## Phase 1: Foundation (Weeks 1–8)
 
 - [x] W1 core: base models, mixins, money.py (Decimal + currency), event bus
-- [ ] W1 i18n: gettext setup, English source strings, French translation, locale/timezone settings
+- [x] W1 i18n: gettext setup, English source strings, French translation, locale/timezone settings
 - [ ] W1 countrypacks: `CountryPack` protocol, contract test suite, `generic` and `fr` packs (skeleton)
 - [ ] W2 TaxIdentity model with per-country validators (SIRET first)
 - [ ] W2 tenants: django-tenants, signup with SIRET, isolation tests
@@ -150,6 +150,7 @@ Signups, trial-to-paid %, MRR, churn, support hours per week, test coverage, CI 
 | 2026-11-18 | Waitlist landing page: `apps.marketing` (JoinWaitlist + SubscribeToWaitlist services, Brevo double opt-in adapter, Celery task with retry on transient errors, django-ratelimit per IP, honeypot); two-product landing at `home`; stub legal notice + privacy pages linked in footer; `WAITLIST_ENABLED` off by default; fr translations complete; exercised over HTTP (closed + open, form → redirect → task). Visual browser check not done (Chrome extension unavailable) | User: fill legal placeholders, create Brevo lists + DOI template, set env, then flip `WAITLIST_ENABLED`; next dev item: Phase 1 W1 core |
 | 2026-11-18 | UX pass (outside the checklist): password show/hide toggle (Alpine CSP 3.17.5 vendored, Lucide icons); EN/FR language switcher (browser language default, cookie override); sign-up closed by default (open locally) with a waitlist-pointing closed page; email verification and sign-in by code with resend/change; one password field; no "Remember me"; no placeholders; rewritten auth templates and glossary in `locale/README.md`; friendly 429 page; redundant allauth flash messages silenced. Flows run end to end against the app; visual check still to do by the user | Phase 1 W1 core. Reminder: About page content still to write |
 | 2026-11-18 | W1 core: `apps.core` with abstract models (UUIDv7 PK, TimeStamped, SoftDelete, CreatedBy, Ordered), `Money` (Decimal-only, currency-checked, half-up rounding to minor unit), injectable `Clock`, `EventBus` (on_commit, robust, idempotent subscribe). User decisions: no TenantScoped (schemas isolate tenants); Audit/Search/Notification/Export mixins built with their own apps (W6, 3a, W5, 3a). Import contract "core imports no feature app"; mypy strict on core | W1 i18n. User may want to amend ARCHITECTURE §5 for the two decisions |
+| 2026-11-18 | W1 i18n: `User.language` (saved at signup, updated by the switcher, applied by `UserLanguageMiddleware` ahead of cookie/browser); TIME_ZONE Europe/Paris, LANGUAGE_CODE en; translation-completeness test (msgfmt); migration forward/backward tests; Site domain from `SITE_DOMAIN` (fix-forward migration, emails no longer say example.com); template coverage restored (`run.core = "ctrace"`). Audit: no untranslated user-facing strings | W1 countrypacks. Set `SITE_DOMAIN` in production env |
 
 ## Session Starter Prompt
 

@@ -1,5 +1,6 @@
 from typing import ClassVar
 
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db.models import CharField, EmailField
 from django.urls import reverse
@@ -21,6 +22,10 @@ class User(AbstractUser):
     last_name = None  # type: ignore[assignment]
     email = EmailField(_("email address"), unique=True)
     username = None  # type: ignore[assignment]
+    # Empty means "not chosen yet": the cookie or browser language applies.
+    language = CharField(
+        _("language"), max_length=10, choices=settings.LANGUAGES, blank=True
+    )
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

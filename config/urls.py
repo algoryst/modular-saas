@@ -7,6 +7,7 @@ from django.views.generic import TemplateView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
 
+from apps.accounts.views import set_language_view
 from apps.marketing.views import LandingView
 
 urlpatterns = [
@@ -23,8 +24,8 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
     path("", include("apps.marketing.urls", namespace="marketing")),
-    # set_language: stores the visitor's language choice in a cookie.
-    path("i18n/", include("django.conf.urls.i18n")),
+    # Stores the language choice in a cookie, and on the account when signed in.
+    path("i18n/setlang/", set_language_view, name="set_language"),
     # Media files
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]

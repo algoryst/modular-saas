@@ -10,12 +10,13 @@ from allauth.account.forms import (
     SignupForm,
 )
 from allauth.socialaccount.forms import SignupForm as SocialSignupForm
+from django.conf import settings
 from django.contrib.auth import forms as admin_forms
 from django.contrib.auth.password_validation import (
     MinimumLengthValidator,
     get_default_password_validators,
 )
-from django.forms import EmailField, Field
+from django.forms import ChoiceField, EmailField, Field, Form
 from django.utils.translation import gettext_lazy as _
 
 from .models import User
@@ -118,3 +119,7 @@ class UserSocialSignupForm(SocialSignupForm):
     Default fields will be added automatically.
     See UserSignupForm otherwise.
     """
+
+
+class LanguageForm(Form):
+    language = ChoiceField(choices=settings.LANGUAGES)
