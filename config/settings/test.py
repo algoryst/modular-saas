@@ -25,6 +25,13 @@ PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
 
+# MIDDLEWARE
+# ------------------------------------------------------------------------------
+# Tests never run collectstatic, so WhiteNoise would warn about a missing STATIC_ROOT.
+MIDDLEWARE = [
+    m for m in MIDDLEWARE if m != "whitenoise.middleware.WhiteNoiseMiddleware"
+]
+
 # DEBUGGING FOR TEMPLATES
 # ------------------------------------------------------------------------------
 TEMPLATES[0]["OPTIONS"]["debug"] = True  # type: ignore[index]
