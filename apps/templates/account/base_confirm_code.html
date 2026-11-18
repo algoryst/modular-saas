@@ -1,0 +1,64 @@
+{% extends "account/base_entrance.html" %}
+{% comment %}
+  Shared code-entry screen (email verification, sign-in code). Keeps allauth's block names
+  (title, action_url, recipient, change_title) so allauth's own child templates still work.
+{% endcomment %}
+{% load i18n allauth account %}
+{% block content %}
+  {% setvar action_url %}{% block action_url %}{% endblock %}{% endsetvar %}
+  {% setvar recipient %}{% block recipient %}{% endblock %}{% endsetvar %}
+  {% setvar title_ %}{% block title %}{% endblock %}{% endsetvar %}
+  {% element h1 %}{{ title_ }}{% endelement %}
+  {% element p %}
+    {% blocktranslate trimmed %}
+      We sent a code to <strong class="font-medium text-zinc-900">{{ recipient }}</strong>. Enter it below, it is only valid for a few minutes.
+    {% endblocktranslate %}
+  {% endelement %}
+  {% element form form=verify_form method="post" action=action_url %}
+    {% slot body %}
+      {% csrf_token %}
+      {% element fields form=verify_form %}{% endelement %}
+      {{ redirect_field }}
+    {% endslot %}
+    {% slot actions %}
+      {% element button type="submit" %}{% translate "Confirm" %}{% endelement %}
+      {% if can_resend %}
+        {% element button form="resend" type="submit" tags="secondary" %}{% translate "Send a new code" %}{% endelement %}
+      {% endif %}
+    {% endslot %}
+  {% endelement %}
+  <form id="resend" method="post" action="{{ action_url }}">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="resend" />
+    {{ redirect_field }}
+  </form>
+  {% if can_change %}
+    {% setvar change_title %}{% block change_title %}{% endblock %}{% endsetvar %}
+    <details class="mt-6 text-sm" {% if change_form.errors %}open{% endif %}>
+      <summary class="cursor-pointer font-medium text-blue-600 hover:underline">{{ change_title }}</summary>
+      {% element form form=change_form method="post" action=action_url %}
+        {% slot body %}
+          {% csrf_token %}
+          {% element fields form=change_form %}{% endelement %}
+          {{ redirect_field }}
+        {% endslot %}
+        {% slot actions %}
+          {% element button name="action" value="change" type="submit" tags="secondary" %}{% translate "Send the code to this address" %}{% endelement %}
+        {% endslot %}
+      {% endelement %}
+    </details>
+  {% endif %}
+  <p class="mt-6 text-sm text-zinc-600">
+    {% if cancel_url %}
+      <a class="hover:text-zinc-900" href="{{ cancel_url }}">{% translate "Cancel" %}</a>
+    {% else %}
+      <button type="submit" form="logout-from-stage" class="hover:text-zinc-900">{% translate "Cancel" %}</button>
+    {% endif %}
+  </p>
+  {% if not cancel_url %}
+    <form id="logout-from-stage" method="post" action="{% url 'account_logout' %}">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{% url 'account_login' %}" />
+    </form>
+  {% endif %}
+{% endblock content %}

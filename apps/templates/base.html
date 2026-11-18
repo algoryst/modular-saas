@@ -27,18 +27,18 @@
             {% include "components/language_switcher.html" %}
             {% if request.user.is_authenticated %}
               <a class="text-zinc-600 hover:text-zinc-900"
-                 href="{% url 'accounts:detail' request.user.pk %}">{% translate "My Profile" %}</a>
+                 href="{% url 'accounts:detail' request.user.pk %}">{% translate "My profile" %}</a>
               {# URL provided by django-allauth/account/urls.py #}
-              <a class="text-zinc-600 hover:text-zinc-900" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
+              <a class="text-zinc-600 hover:text-zinc-900" href="{% url 'account_logout' %}">{% translate "Sign out" %}</a>
             {% else %}
-              {# URL provided by django-allauth/account/urls.py #}
+              {# Quiet links: each page keeps a single primary action. #}
               <a id="log-in-link"
                  class="text-zinc-600 hover:text-zinc-900"
-                 href="{% url 'account_login' %}">{% translate "Sign In" %}</a>
+                 href="{% url 'account_login' %}">{% translate "Sign in" %}</a>
               {% if ACCOUNT_ALLOW_REGISTRATION %}
                 <a id="sign-up-link"
-                   class="rounded-lg bg-blue-600 px-3 py-1.5 font-medium text-white hover:bg-blue-700"
-                   href="{% url 'account_signup' %}">{% translate "Sign Up" %}</a>
+                   class="font-medium text-blue-600 hover:text-blue-700"
+                   href="{% url 'account_signup' %}">{% translate "Create account" %}</a>
               {% endif %}
             {% endif %}
           </div>

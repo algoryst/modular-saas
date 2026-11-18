@@ -1,0 +1,1 @@
+{# Silenced: being signed in is visible in the nav. Renders empty, so allauth adds no message. #}

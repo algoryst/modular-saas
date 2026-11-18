@@ -1,5 +1,24 @@
 # Translations
 
+## Glossary
+
+Use these words everywhere: templates, form labels, emails, error messages. English is the
+source; French is the reference translation. Sentence case in both languages ("Sign in", not
+"Sign In"). Plain words over jargon: "Créer un compte", never "S'enregistrer" or "S'inscrire".
+
+| English | Français | Avoid |
+|---|---|---|
+| Sign in | Se connecter | S'identifier, Connexion (as a verb) |
+| Sign out | Se déconnecter | Déconnexion (as a verb) |
+| Create an account / Create account | Créer un compte | S'inscrire, S'enregistrer |
+| Email address | Adresse e-mail | Courriel, Mail |
+| Password | Mot de passe | |
+| Code (one-time) | Code | Jeton, Token |
+| Sign-in code | Code de connexion | |
+| Workspace | Espace de travail | Tenant, Organisation |
+| Waitlist | Liste d'attente | |
+
+
 Start by configuring the `LANGUAGES` settings in `base.py`, by uncommenting languages you are willing to support. Then, translation strings will be placed in this folder when running:
 
 ```bash

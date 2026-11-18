@@ -328,19 +328,40 @@ CELERY_TASK_SEND_SENT_EVENT = True
 CELERY_WORKER_HIJACK_ROOT_LOGGER = False
 # django-allauth
 # ------------------------------------------------------------------------------
-ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", True)
+# Closed until the beta: the landing page collects a waitlist instead.
+ACCOUNT_ALLOW_REGISTRATION = env.bool("DJANGO_ACCOUNT_ALLOW_REGISTRATION", False)
 # https://docs.allauth.org/en/latest/account/configuration.html
 ACCOUNT_LOGIN_METHODS = {"email"}
 # https://docs.allauth.org/en/latest/account/configuration.html
-ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*", "password2*"]
+# One password field: the show/hide toggle replaces typing it twice.
+ACCOUNT_SIGNUP_FIELDS = ["email*", "password1*"]
 # https://docs.allauth.org/en/latest/account/configuration.html
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 # https://docs.allauth.org/en/latest/account/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+# A code typed on the same page works even when the email is read on another device.
+ACCOUNT_EMAIL_VERIFICATION_BY_CODE_ENABLED = True
+ACCOUNT_EMAIL_VERIFICATION_SUPPORTS_RESEND = True
+ACCOUNT_EMAIL_VERIFICATION_SUPPORTS_CHANGE = True
+# Passwordless option on the login page.
+ACCOUNT_LOGIN_BY_CODE_ENABLED = True
+ACCOUNT_LOGIN_BY_CODE_SUPPORTS_RESEND = True
+# Always remember the session (SESSION_COOKIE_AGE); no "Remember me" decision.
+ACCOUNT_SESSION_REMEMBER = True
 # https://docs.allauth.org/en/latest/account/configuration.html
 ACCOUNT_ADAPTER = "apps.accounts.adapters.AccountAdapter"
 # https://docs.allauth.org/en/latest/account/forms.html
-ACCOUNT_FORMS = {"signup": "apps.accounts.forms.UserSignupForm"}
+ACCOUNT_FORMS = {
+    "login": "apps.accounts.forms.UserLoginForm",
+    "signup": "apps.accounts.forms.UserSignupForm",
+    "reset_password": "apps.accounts.forms.UserResetPasswordForm",
+    "request_login_code": "apps.accounts.forms.UserRequestLoginCodeForm",
+    "confirm_login_code": "apps.accounts.forms.UserConfirmLoginCodeForm",
+    "confirm_email_verification_code": (
+        "apps.accounts.forms.UserConfirmEmailVerificationCodeForm"
+    ),
+    "change_email": "apps.accounts.forms.UserChangeEmailForm",
+}
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
 SOCIALACCOUNT_ADAPTER = "apps.accounts.adapters.SocialAccountAdapter"
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html

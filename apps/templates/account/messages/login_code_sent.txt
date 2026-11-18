@@ -1,0 +1,1 @@
+{# Silenced: the code page already says where the code went. Renders empty, so allauth adds no message. #}

@@ -1,0 +1,33 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n allauth account %}
+{% block head_title %}{% translate "Sign in" %}{% endblock head_title %}
+{% block content %}
+  {% element h1 %}{% translate "Sign in" %}{% endelement %}
+  {% if ACCOUNT_ALLOW_REGISTRATION %}
+    {% element p %}
+      {% blocktranslate trimmed %}
+        New here? <a class="font-medium text-blue-600 hover:underline" href="{{ signup_url }}">Create an account</a>
+      {% endblocktranslate %}
+    {% endelement %}
+  {% endif %}
+  {% url 'account_login' as login_url %}
+  {% element form form=form method="post" action=login_url %}
+    {% slot body %}
+      {% csrf_token %}
+      {% element fields form=form %}{% endelement %}
+      {{ redirect_field }}
+    {% endslot %}
+    {% slot actions %}
+      {% element button type="submit" %}{% translate "Sign in" %}{% endelement %}
+    {% endslot %}
+  {% endelement %}
+  {% if LOGIN_BY_CODE_ENABLED %}
+    <div class="my-6 flex items-center gap-3 text-xs text-zinc-500">
+      <span class="h-px flex-1 bg-zinc-200"></span>
+      {% translate "or" %}
+      <span class="h-px flex-1 bg-zinc-200"></span>
+    </div>
+    {% translate "Email me a sign-in code" as code_label %}
+    {% include "components/link_button.html" with href=request_login_code_url label=code_label variant="secondary" %}
+  {% endif %}
+{% endblock content %}

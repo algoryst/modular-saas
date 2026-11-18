@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-18 11:28+0000\n"
+"POT-Creation-Date: 2026-11-18 13:30+0000\n"
 "Language: fr-FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,9 +30,23 @@ msgstr "Dates importantes"
 msgid "Accounts"
 msgstr "Comptes"
 
-#: apps/accounts/forms.py:27 apps/accounts/tests/test_forms.py:41
+#: apps/accounts/forms.py:41 apps/accounts/tests/test_forms.py:41
 msgid "This email has already been taken."
 msgstr "Cette adresse e-mail est déjà utilisée."
+
+#: apps/accounts/forms.py:56
+msgid "Email address"
+msgstr "Adresse e-mail"
+
+#: apps/accounts/forms.py:70
+msgid "Avoid common or all-number passwords."
+msgstr "Évitez les mots de passe courants ou composés uniquement de chiffres."
+
+#: apps/accounts/forms.py:72
+#, python-format
+msgid ""
+"At least %(min_length)d characters. Avoid common or all-number passwords."
+msgstr "Au moins %(min_length)d caractères. Évitez les mots de passe courants ou composés uniquement de chiffres."
 
 #: apps/accounts/models.py:19
 msgid "Name of User"
@@ -259,7 +273,10 @@ msgid ""
 "We only set cookies that are strictly necessary: your session, protection "
 "against forged requests, and, if you choose a language, a cookie that "
 "remembers that choice."
-msgstr "Nous ne déposons que des cookies strictement nécessaires : votre session, la protection contre les requêtes falsifiées et, si vous choisissez une langue, un cookie qui mémorise ce choix."
+msgstr ""
+"Nous ne déposons que des cookies strictement nécessaires : votre session, la "
+"protection contre les requêtes falsifiées et, si vous choisissez une langue, "
+"un cookie qui mémorise ce choix."
 
 #: apps/marketing/templates/marketing/privacy.html:30
 msgid "Audience measurement"
@@ -304,6 +321,20 @@ msgstr "Page introuvable"
 msgid "This page doesn't exist or has moved."
 msgstr "Cette page n'existe pas ou a été déplacée."
 
+#: apps/templates/429.html:3 apps/templates/429.html:6
+msgid "One moment, please"
+msgstr "Un instant, s'il vous plaît"
+
+#: apps/templates/429.html:8
+msgid ""
+"You tried that several times in a short time. Wait a few seconds, then try "
+"again."
+msgstr "Vous avez essayé plusieurs fois en peu de temps. Patientez quelques secondes, puis réessayez."
+
+#: apps/templates/429.html:11
+msgid "Try again"
+msgstr "Réessayer"
+
 #: apps/templates/500.html:3 apps/templates/500.html:5
 msgid "Something went wrong"
 msgstr "Une erreur est survenue"
@@ -311,6 +342,140 @@ msgstr "Une erreur est survenue"
 #: apps/templates/500.html:6
 msgid "We have been notified. Please try again in a few minutes."
 msgstr "Nous avons été prévenus. Veuillez réessayer dans quelques minutes."
+
+#: apps/templates/account/base_confirm_code.html:13
+#, python-format
+msgid ""
+"We sent a code to <strong class=\"font-medium text-zinc-900\">%(recipient)s</"
+"strong>. Enter it below, it is only valid for a few minutes."
+msgstr "Nous avons envoyé un code à <strong class=\"font-medium text-zinc-900\">%(recipient)s</strong>. Saisissez-le ci-dessous, il n'est valable que quelques minutes."
+
+#: apps/templates/account/base_confirm_code.html:24
+msgid "Confirm"
+msgstr "Confirmer"
+
+#: apps/templates/account/base_confirm_code.html:26
+msgid "Send a new code"
+msgstr "Envoyer un nouveau code"
+
+#: apps/templates/account/base_confirm_code.html:46
+msgid "Send the code to this address"
+msgstr "Envoyer le code à cette adresse"
+
+#: apps/templates/account/base_confirm_code.html:53
+#: apps/templates/account/base_confirm_code.html:55
+msgid "Cancel"
+msgstr "Annuler"
+
+#: apps/templates/account/confirm_email_verification_code.html:3
+#: apps/templates/account/confirm_email_verification_code.html:4
+msgid "Check your email"
+msgstr "Consultez vos e-mails"
+
+#: apps/templates/account/confirm_email_verification_code.html:7
+msgid "Wrong address? Use a different email"
+msgstr "Mauvaise adresse ? Utilisez une autre adresse e-mail"
+
+#: apps/templates/account/confirm_login_code.html:3
+#: apps/templates/account/request_login_code.html:3
+#: apps/templates/account/request_login_code.html:5
+msgid "Sign in with a code"
+msgstr "Se connecter avec un code"
+
+#: apps/templates/account/confirm_login_code.html:4
+msgid "Enter your sign-in code"
+msgstr "Saisissez votre code de connexion"
+
+#: apps/templates/account/login.html:3 apps/templates/account/login.html:5
+#: apps/templates/account/login.html:21
+#: apps/templates/allauth/layouts/entrance.html:3 apps/templates/base.html:37
+msgid "Sign in"
+msgstr "Se connecter"
+
+#: apps/templates/account/login.html:8
+#, python-format
+msgid ""
+"New here? <a class=\"font-medium text-blue-600 hover:underline\" "
+"href=\"%(signup_url)s\">Create an account</a>"
+msgstr "Nouveau ici ? <a class=\"font-medium text-blue-600 hover:underline\" href=\"%(signup_url)s\">Créer un compte</a>"
+
+#: apps/templates/account/login.html:27
+msgid "or"
+msgstr "ou"
+
+#: apps/templates/account/login.html:30
+msgid "Email me a sign-in code"
+msgstr "Recevoir un code de connexion par e-mail"
+
+#: apps/templates/account/password_reset.html:3
+#: apps/templates/account/password_reset.html:5
+msgid "Reset your password"
+msgstr "Réinitialiser votre mot de passe"
+
+#: apps/templates/account/password_reset.html:10
+msgid ""
+"Enter your email address and we will send you a link to choose a new "
+"password."
+msgstr "Saisissez votre adresse e-mail et nous vous enverrons un lien pour choisir un nouveau mot de passe."
+
+#: apps/templates/account/password_reset.html:20
+msgid "Send reset link"
+msgstr "Envoyer le lien"
+
+#: apps/templates/account/password_reset.html:25
+#, python-format
+msgid ""
+"Remembered it? <a class=\"font-medium text-blue-600 hover:underline\" "
+"href=\"%(login_url)s\">Sign in</a>"
+msgstr "Vous vous en souvenez ? <a class=\"font-medium text-blue-600 hover:underline\" href=\"%(login_url)s\">Se connecter</a>"
+
+#: apps/templates/account/request_login_code.html:7
+msgid ""
+"Enter your email address and we will send you a one-time code. No password "
+"needed."
+msgstr "Saisissez votre adresse e-mail et nous vous enverrons un code à usage unique. Aucun mot de passe nécessaire."
+
+#: apps/templates/account/request_login_code.html:16
+msgid "Send code"
+msgstr "Envoyer le code"
+
+#: apps/templates/account/request_login_code.html:20
+msgid "Sign in with a password instead"
+msgstr "Se connecter avec un mot de passe"
+
+#: apps/templates/account/signup.html:3
+msgid "Create an account"
+msgstr "Créer un compte"
+
+#: apps/templates/account/signup.html:5
+msgid "Create your account"
+msgstr "Créez votre compte"
+
+#: apps/templates/account/signup.html:7
+#, python-format
+msgid ""
+"Already have an account? <a class=\"font-medium text-blue-600 hover:"
+"underline\" href=\"%(login_url)s\">Sign in</a>"
+msgstr "Vous avez déjà un compte ? <a class=\"font-medium text-blue-600 hover:underline\" href=\"%(login_url)s\">Se connecter</a>"
+
+#: apps/templates/account/signup.html:19 apps/templates/base.html:41
+msgid "Create account"
+msgstr "Créer un compte"
+
+#: apps/templates/account/signup_closed.html:3
+#: apps/templates/account/signup_closed.html:5
+msgid "Sign-ups open soon"
+msgstr "Les inscriptions ouvrent bientôt"
+
+#: apps/templates/account/signup_closed.html:7
+msgid ""
+"We are putting the finishing touches on the platform. Join the waitlist and "
+"we will email you as soon as you can create your account."
+msgstr "Nous mettons la dernière main à la plateforme. Rejoignez la liste d'attente et nous vous écrirons dès que vous pourrez créer votre compte."
+
+#: apps/templates/account/signup_closed.html:10
+msgid "Go to the waitlist"
+msgstr "Aller à la liste d'attente"
 
 #: apps/templates/accounts/user_detail.html:10
 #: apps/templates/accounts/user_form.html:3
@@ -330,10 +495,6 @@ msgstr "Authentification à deux facteurs"
 msgid "Save"
 msgstr "Enregistrer"
 
-#: apps/templates/allauth/layouts/entrance.html:3 apps/templates/base.html:37
-msgid "Sign In"
-msgstr "S'identifier"
-
 #: apps/templates/base.html:23
 msgid "Main"
 msgstr "Principal"
@@ -343,16 +504,12 @@ msgid "About"
 msgstr "À propos"
 
 #: apps/templates/base.html:30
-msgid "My Profile"
-msgstr "Mon Profil"
+msgid "My profile"
+msgstr "Mon profil"
 
 #: apps/templates/base.html:32
-msgid "Sign Out"
+msgid "Sign out"
 msgstr "Se déconnecter"
-
-#: apps/templates/base.html:41
-msgid "Sign Up"
-msgstr "S'inscrire"
 
 #: apps/templates/components/form_field.html:21
 msgid "Show password"
@@ -369,6 +526,9 @@ msgstr "Anglais"
 #: config/settings/base.py:37
 msgid "French"
 msgstr "Français"
+
+#~ msgid "Sign Up"
+#~ msgstr "S'inscrire"
 
 #~ msgid "Account Inactive"
 #~ msgstr "Compte inactif"
@@ -429,9 +589,6 @@ msgstr "Français"
 #~ "Veuillez confirmer que <a href=\"mailto:%(email)s\">%(email)s</a> est un "
 #~ "e-mail adresse de l'utilisateur %(user_display)s."
 
-#~ msgid "Confirm"
-#~ msgstr "Confirm"
-
 #, python-format
 #~ msgid ""
 #~ "This e-mail confirmation link expired or is invalid. Please <a "
@@ -451,9 +608,6 @@ msgstr "Français"
 #~ msgstr ""
 #~ "Ou, <a href=\"%(signup_url)s\">créez</a> un compte %(site_name)s et "
 #~ "connectez-vous ci-dessous :"
-
-#~ msgid "or"
-#~ msgstr "ou"
 
 #, python-format
 #~ msgid ""
@@ -481,9 +635,6 @@ msgstr "Français"
 #~ msgstr ""
 #~ "Mot de passe oublié? Entrez votre adresse e-mail ci-dessous, et nous vous "
 #~ "enverrons un e-mail vous permettant de le réinitialiser."
-
-#~ msgid "Reset My Password"
-#~ msgstr "Réinitialiser mon mot de passe"
 
 #~ msgid "Please contact us if you have any trouble resetting your password."
 #~ msgstr ""
@@ -519,14 +670,6 @@ msgstr "Français"
 
 #~ msgid "Signup"
 #~ msgstr "S'inscrire"
-
-#, python-format
-#~ msgid ""
-#~ "Already have an account? Then please <a href=\"%(login_url)s\">sign in</"
-#~ "a>."
-#~ msgstr ""
-#~ "Vous avez déjà un compte? Alors veuillez <a href=\"%(login_url)s\">vous "
-#~ "connecter</a>."
 
 #~ msgid "Sign Up Closed"
 #~ msgstr "Inscriptions closes"

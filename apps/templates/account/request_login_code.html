@@ -1,0 +1,22 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n allauth account %}
+{% block head_title %}{% translate "Sign in with a code" %}{% endblock head_title %}
+{% block content %}
+  {% element h1 %}{% translate "Sign in with a code" %}{% endelement %}
+  {% element p %}
+    {% translate "Enter your email address and we will send you a one-time code. No password needed." %}
+  {% endelement %}
+  {% element form form=form method="post" action=request_login_code_url %}
+    {% slot body %}
+      {% csrf_token %}
+      {% element fields form=form %}{% endelement %}
+      {{ redirect_field }}
+    {% endslot %}
+    {% slot actions %}
+      {% element button type="submit" %}{% translate "Send code" %}{% endelement %}
+    {% endslot %}
+  {% endelement %}
+  <p class="mt-6 text-sm text-zinc-600">
+    <a class="font-medium text-blue-600 hover:underline" href="{{ login_url }}">{% translate "Sign in with a password instead" %}</a>
+  </p>
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n allauth %}
+{% block head_title %}{% translate "Create an account" %}{% endblock head_title %}
+{% block content %}
+  {% element h1 %}{% translate "Create your account" %}{% endelement %}
+  {% element p %}
+    {% blocktranslate trimmed %}
+      Already have an account? <a class="font-medium text-blue-600 hover:underline" href="{{ login_url }}">Sign in</a>
+    {% endblocktranslate %}
+  {% endelement %}
+  {% url 'account_signup' as action_url %}
+  {% element form form=form method="post" action=action_url %}
+    {% slot body %}
+      {% csrf_token %}
+      {% element fields form=form %}{% endelement %}
+      {{ redirect_field }}
+    {% endslot %}
+    {% slot actions %}
+      {% element button type="submit" %}{% translate "Create account" %}{% endelement %}
+    {% endslot %}
+  {% endelement %}
+{% endblock content %}

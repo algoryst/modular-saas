@@ -1,0 +1,6 @@
+{% extends "account/base_confirm_code.html" %}
+{% load i18n %}
+{% block head_title %}{% translate "Sign in with a code" %}{% endblock head_title %}
+{% block title %}{% translate "Enter your sign-in code" %}{% endblock %}
+{% block recipient %}{{ email|default:phone }}{% endblock %}
+{% block action_url %}{% url 'account_confirm_login_code' %}{% endblock %}

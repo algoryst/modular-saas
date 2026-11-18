@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-18 11:28+0000\n"
+"POT-Creation-Date: 2026-11-18 13:30+0000\n"
 "Language: en-US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,8 +29,22 @@ msgstr ""
 msgid "Accounts"
 msgstr ""
 
-#: apps/accounts/forms.py:27 apps/accounts/tests/test_forms.py:41
+#: apps/accounts/forms.py:41 apps/accounts/tests/test_forms.py:41
 msgid "This email has already been taken."
+msgstr ""
+
+#: apps/accounts/forms.py:56
+msgid "Email address"
+msgstr ""
+
+#: apps/accounts/forms.py:70
+msgid "Avoid common or all-number passwords."
+msgstr ""
+
+#: apps/accounts/forms.py:72
+#, python-format
+msgid ""
+"At least %(min_length)d characters. Avoid common or all-number passwords."
 msgstr ""
 
 #: apps/accounts/models.py:19
@@ -282,12 +296,160 @@ msgstr ""
 msgid "This page doesn't exist or has moved."
 msgstr ""
 
+#: apps/templates/429.html:3 apps/templates/429.html:6
+msgid "One moment, please"
+msgstr ""
+
+#: apps/templates/429.html:8
+msgid ""
+"You tried that several times in a short time. Wait a few seconds, then try "
+"again."
+msgstr ""
+
+#: apps/templates/429.html:11
+msgid "Try again"
+msgstr ""
+
 #: apps/templates/500.html:3 apps/templates/500.html:5
 msgid "Something went wrong"
 msgstr ""
 
 #: apps/templates/500.html:6
 msgid "We have been notified. Please try again in a few minutes."
+msgstr ""
+
+#: apps/templates/account/base_confirm_code.html:13
+#, python-format
+msgid ""
+"We sent a code to <strong class=\"font-medium text-zinc-900\">%(recipient)s</"
+"strong>. Enter it below, it is only valid for a few minutes."
+msgstr ""
+
+#: apps/templates/account/base_confirm_code.html:24
+msgid "Confirm"
+msgstr ""
+
+#: apps/templates/account/base_confirm_code.html:26
+msgid "Send a new code"
+msgstr ""
+
+#: apps/templates/account/base_confirm_code.html:46
+msgid "Send the code to this address"
+msgstr ""
+
+#: apps/templates/account/base_confirm_code.html:53
+#: apps/templates/account/base_confirm_code.html:55
+msgid "Cancel"
+msgstr ""
+
+#: apps/templates/account/confirm_email_verification_code.html:3
+#: apps/templates/account/confirm_email_verification_code.html:4
+msgid "Check your email"
+msgstr ""
+
+#: apps/templates/account/confirm_email_verification_code.html:7
+msgid "Wrong address? Use a different email"
+msgstr ""
+
+#: apps/templates/account/confirm_login_code.html:3
+#: apps/templates/account/request_login_code.html:3
+#: apps/templates/account/request_login_code.html:5
+msgid "Sign in with a code"
+msgstr ""
+
+#: apps/templates/account/confirm_login_code.html:4
+msgid "Enter your sign-in code"
+msgstr ""
+
+#: apps/templates/account/login.html:3 apps/templates/account/login.html:5
+#: apps/templates/account/login.html:21
+#: apps/templates/allauth/layouts/entrance.html:3 apps/templates/base.html:37
+msgid "Sign in"
+msgstr ""
+
+#: apps/templates/account/login.html:8
+#, python-format
+msgid ""
+"New here? <a class=\"font-medium text-blue-600 hover:underline\" "
+"href=\"%(signup_url)s\">Create an account</a>"
+msgstr ""
+
+#: apps/templates/account/login.html:27
+msgid "or"
+msgstr ""
+
+#: apps/templates/account/login.html:30
+msgid "Email me a sign-in code"
+msgstr ""
+
+#: apps/templates/account/password_reset.html:3
+#: apps/templates/account/password_reset.html:5
+msgid "Reset your password"
+msgstr ""
+
+#: apps/templates/account/password_reset.html:10
+msgid ""
+"Enter your email address and we will send you a link to choose a new "
+"password."
+msgstr ""
+
+#: apps/templates/account/password_reset.html:20
+msgid "Send reset link"
+msgstr ""
+
+#: apps/templates/account/password_reset.html:25
+#, python-format
+msgid ""
+"Remembered it? <a class=\"font-medium text-blue-600 hover:underline\" "
+"href=\"%(login_url)s\">Sign in</a>"
+msgstr ""
+
+#: apps/templates/account/request_login_code.html:7
+msgid ""
+"Enter your email address and we will send you a one-time code. No password "
+"needed."
+msgstr ""
+
+#: apps/templates/account/request_login_code.html:16
+msgid "Send code"
+msgstr ""
+
+#: apps/templates/account/request_login_code.html:20
+msgid "Sign in with a password instead"
+msgstr ""
+
+#: apps/templates/account/signup.html:3
+msgid "Create an account"
+msgstr ""
+
+#: apps/templates/account/signup.html:5
+msgid "Create your account"
+msgstr ""
+
+#: apps/templates/account/signup.html:7
+#, python-format
+msgid ""
+"Already have an account? <a class=\"font-medium text-blue-600 hover:"
+"underline\" href=\"%(login_url)s\">Sign in</a>"
+msgstr ""
+
+#: apps/templates/account/signup.html:19 apps/templates/base.html:41
+msgid "Create account"
+msgstr ""
+
+#: apps/templates/account/signup_closed.html:3
+#: apps/templates/account/signup_closed.html:5
+msgid "Sign-ups open soon"
+msgstr ""
+
+#: apps/templates/account/signup_closed.html:7
+msgid ""
+"We are putting the finishing touches on the platform. Join the waitlist and "
+"we will email you as soon as you can create your account."
+msgstr ""
+
+#: apps/templates/account/signup_closed.html:10
+msgid "Go to the waitlist"
 msgstr ""
 
 #: apps/templates/accounts/user_detail.html:10
@@ -308,10 +470,6 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: apps/templates/allauth/layouts/entrance.html:3 apps/templates/base.html:37
-msgid "Sign In"
-msgstr ""
-
 #: apps/templates/base.html:23
 msgid "Main"
 msgstr ""
@@ -321,15 +479,11 @@ msgid "About"
 msgstr ""
 
 #: apps/templates/base.html:30
-msgid "My Profile"
+msgid "My profile"
 msgstr ""
 
 #: apps/templates/base.html:32
-msgid "Sign Out"
-msgstr ""
-
-#: apps/templates/base.html:41
-msgid "Sign Up"
+msgid "Sign out"
 msgstr ""
 
 #: apps/templates/components/form_field.html:21

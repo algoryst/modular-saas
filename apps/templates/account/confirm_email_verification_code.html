@@ -1,0 +1,7 @@
+{% extends "account/base_confirm_code.html" %}
+{% load i18n %}
+{% block head_title %}{% translate "Check your email" %}{% endblock head_title %}
+{% block title %}{% translate "Check your email" %}{% endblock %}
+{% block recipient %}{{ email }}{% endblock %}
+{% block action_url %}{% url 'account_email_verification_sent' %}{% endblock %}
+{% block change_title %}{% translate "Wrong address? Use a different email" %}{% endblock %}

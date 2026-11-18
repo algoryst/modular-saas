@@ -1,0 +1,12 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n allauth %}
+{% block head_title %}{% translate "Sign-ups open soon" %}{% endblock head_title %}
+{% block content %}
+  {% element h1 %}{% translate "Sign-ups open soon" %}{% endelement %}
+  {% element p %}
+    {% translate "We are putting the finishing touches on the platform. Join the waitlist and we will email you as soon as you can create your account." %}
+  {% endelement %}
+  {% url 'home' as home_url %}
+  {% translate "Go to the waitlist" as waitlist_label %}
+  {% include "components/link_button.html" with href=home_url|add:"#waitlist" label=waitlist_label %}
+{% endblock content %}
