@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from django.urls import resolve, reverse
 
 if TYPE_CHECKING:
-    from apps.users.models import User
+    from apps.accounts.models import User
 
 
 def test_user_detail(user: User):

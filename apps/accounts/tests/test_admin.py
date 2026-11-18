@@ -8,22 +8,22 @@ from django.contrib.auth.models import AnonymousUser
 from django.urls import reverse
 from pytest_django.asserts import assertRedirects
 
-from apps.users.models import User
+from apps.accounts.models import User
 
 
 class TestUserAdmin:
     def test_changelist(self, admin_client):
-        url = reverse("admin:users_user_changelist")
+        url = reverse("admin:accounts_user_changelist")
         response = admin_client.get(url)
         assert response.status_code == HTTPStatus.OK
 
     def test_search(self, admin_client):
-        url = reverse("admin:users_user_changelist")
+        url = reverse("admin:accounts_user_changelist")
         response = admin_client.get(url, data={"q": "test"})
         assert response.status_code == HTTPStatus.OK
 
     def test_add(self, admin_client):
-        url = reverse("admin:users_user_add")
+        url = reverse("admin:accounts_user_add")
         response = admin_client.get(url)
         assert response.status_code == HTTPStatus.OK
 
@@ -40,7 +40,7 @@ class TestUserAdmin:
 
     def test_view_user(self, admin_client):
         user = User.objects.get(email="admin@example.com")
-        url = reverse("admin:users_user_change", kwargs={"object_id": user.pk})
+        url = reverse("admin:accounts_user_change", kwargs={"object_id": user.pk})
         response = admin_client.get(url)
         assert response.status_code == HTTPStatus.OK
 
@@ -48,7 +48,7 @@ class TestUserAdmin:
     def _force_allauth(self, settings):
         settings.DJANGO_ADMIN_FORCE_ALLAUTH = True
         # Reload the admin module to apply the setting change
-        import apps.users.admin as users_admin
+        import apps.accounts.admin as users_admin
 
         with contextlib.suppress(admin.sites.AlreadyRegistered):  # type: ignore[attr-defined]
             reload(users_admin)

@@ -3,7 +3,7 @@ from __future__ import annotations
 from factory import Faker, post_generation
 from factory.django import DjangoModelFactory
 
-from apps.users.models import User
+from apps.accounts.models import User
 
 
 class UserFactory(DjangoModelFactory[User]):

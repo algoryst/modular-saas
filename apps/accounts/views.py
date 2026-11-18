@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import DetailView, RedirectView, UpdateView
 
-from apps.users.models import User
+from apps.accounts.models import User
 
 if TYPE_CHECKING:
     from django.db.models import QuerySet
@@ -46,7 +46,7 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self) -> str:
-        return reverse("users:detail", kwargs={"pk": self.request.user.pk})
+        return reverse("accounts:detail", kwargs={"pk": self.request.user.pk})
 
 
 user_redirect_view = UserRedirectView.as_view()

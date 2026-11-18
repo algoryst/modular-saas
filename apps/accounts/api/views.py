@@ -4,7 +4,7 @@ from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, UpdateMode
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from apps.users.models import User
+from apps.accounts.models import User
 
 from .serializers import UserSerializer
 

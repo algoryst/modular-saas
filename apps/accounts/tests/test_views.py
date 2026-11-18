@@ -13,14 +13,14 @@ from django.http import HttpRequest, HttpResponseRedirect
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
-from apps.users.forms import UserAdminChangeForm
-from apps.users.tests.factories import UserFactory
-from apps.users.views import UserRedirectView, UserUpdateView, user_detail_view
+from apps.accounts.forms import UserAdminChangeForm
+from apps.accounts.tests.factories import UserFactory
+from apps.accounts.views import UserRedirectView, UserUpdateView, user_detail_view
 
 if TYPE_CHECKING:
     from django.test import RequestFactory
 
-    from apps.users.models import User
+    from apps.accounts.models import User
 
 pytestmark = pytest.mark.django_db
 

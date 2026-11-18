@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from apps.users.models import User
+    from apps.accounts.models import User
 
 
 def test_user_get_absolute_url(user: User):
