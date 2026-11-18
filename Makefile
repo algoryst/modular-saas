@@ -35,11 +35,13 @@ migrate:
 migrations-check:
 	$(RUN) python manage.py makemigrations --check --dry-run
 
+# Compiled translations (*.mo) are build artifacts, not in git: build them first so a
+# fresh checkout (CI, a new developer) tests the French pages too.
 test:
-	$(RUN) sh -c "coverage run -m pytest -p no:sugar && sh scripts/coverage-gates.sh"
+	$(RUN) sh -c "python manage.py compilemessages --ignore=.venv && coverage run -m pytest -p no:sugar && sh scripts/coverage-gates.sh"
 
 test-one:
-	$(RUN) pytest -p no:sugar $(T)
+	$(RUN) sh -c "python manage.py compilemessages --ignore=.venv -v 0 && pytest -p no:sugar $(T)"
 
 # Waits for VS Code "Debug a test" to attach on port 5679, then runs T.
 debug-test:

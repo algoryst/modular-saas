@@ -71,6 +71,7 @@ on the host through `uv`.
 | Need a verification or sign-in code | Mailpit, or `curl -s localhost:8025/api/v1/messages` |
 | SIRET lookup never shows | Expected without `SIRENE_API_KEY`: lookup is off and signup uses manual entry |
 | Slow page / N+1 queries | Django Debug Toolbar is on in local settings (right edge of the page) |
+| Pages render English although `lang="fr"` | Compiled translations (`*.mo`) are git-ignored build artifacts. `make test` and `make test-one` compile them; for the dev server run `make messages` |
 | Translation shows in English | `make messages`, fill the empty or fuzzy `msgstr`, run again. `tests/test_translations.py` fails on missing ones |
 
 Run a shell: `docker compose -f docker-compose.local.yml run --rm django python manage.py shell`.
