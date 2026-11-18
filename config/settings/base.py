@@ -68,12 +68,17 @@ else:
 
 # Services own their transactions (transaction.atomic + on_commit side effects).
 DATABASES["default"]["ATOMIC_REQUESTS"] = False
+# django-tenants: one Postgres schema per workspace, selected per request.
+DATABASES["default"]["ENGINE"] = "django_tenants.postgresql_backend"
+DATABASE_ROUTERS = ["django_tenants.routers.TenantSyncRouter"]
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
 
 # URLS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#root-urlconf
-ROOT_URLCONF = "config.urls"
+# Workspace hosts use ROOT_URLCONF; the root domain uses PUBLIC_SCHEMA_URLCONF.
+ROOT_URLCONF = "config.urls_tenant"
+PUBLIC_SCHEMA_URLCONF = "config.urls"
 # https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 WSGI_APPLICATION = "config.wsgi.application"
 
@@ -106,13 +111,29 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "apps.core",
+    "apps.tenants",
     "apps.countrypacks",
     "apps.accounts",
     "apps.marketing",
     # Your stuff: custom apps go here
 ]
-# https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+# MULTI-TENANCY (django-tenants)
+# ------------------------------------------------------------------------------
+# Public schema: workspaces, domains, users, memberships, auth, sessions, allauth.
+# Tenant schemas: business data only. An app in neither list gets no tables.
+SHARED_APPS = ["django_tenants", "apps.tenants", *DJANGO_APPS, *THIRD_PARTY_APPS]
+SHARED_APPS += [app for app in LOCAL_APPS if app not in ("apps.tenants",)]
+# Feature apps with business data (CRM, quotes, ...) are added here, not to SHARED.
+TENANT_APPS = ["django.contrib.contenttypes"]
+INSTALLED_APPS = SHARED_APPS + [app for app in TENANT_APPS if app not in SHARED_APPS]
+TENANT_MODEL = "tenants.Tenant"
+TENANT_DOMAIN_MODEL = "tenants.Domain"
+# Unknown hosts (and the test client's "testserver") get the public site.
+SHOW_PUBLIC_IF_NO_TENANT_FOUND = True
+# Schema names derive from what people type: never adopt an existing schema.
+TENANT_REJECT_EXISTING_SCHEMA = True
+# One workspace per tax identity (SIRET); boilerplate buyers may turn this off.
+TENANT_UNIQUE_TAX_ID = env.bool("TENANT_UNIQUE_TAX_ID", default=True)
 
 # MIGRATIONS
 # ------------------------------------------------------------------------------
@@ -157,6 +178,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
 MIDDLEWARE = [
+    # First: picks the workspace schema from the host before anything touches the DB.
+    "django_tenants.middleware.main.TenantMainMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",

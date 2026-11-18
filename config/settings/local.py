@@ -21,6 +21,8 @@ CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
         "LOCATION": "",
+        # Prefix keys with the schema: workspaces never share cache entries.
+        "KEY_FUNCTION": "django_tenants.cache.make_key",
     },
 }
 

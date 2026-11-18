@@ -45,6 +45,7 @@ dependencies = [
     { name = "django-redis" },
     { name = "django-storages", extra = ["s3"] },
     { name = "django-tailwind-cli" },
+    { name = "django-tenants" },
     { name = "djangorestframework" },
     { name = "drf-spectacular" },
     { name = "flower" },
@@ -105,6 +106,7 @@ requires-dist = [
     { name = "django-redis", specifier = "==7.0.0" },
     { name = "django-storages", extras = ["s3"], specifier = "==1.14.6" },
     { name = "django-tailwind-cli", specifier = "==4.8.2" },
+    { name = "django-tenants", specifier = "==4.0.6" },
     { name = "djangorestframework", specifier = "==3.18.3" },
     { name = "drf-spectacular", specifier = "==0.30.0" },
     { name = "flower", specifier = "==2.2.0" },
@@ -977,6 +979,18 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/77/4e/014cad8b6b66f021025383d93998f86e722b8735770cd7c06c8284b9669d/django_tailwind_cli-4.8.2.tar.gz", hash = "sha256:9ef2455e491ab9f2686af26f2cd2491ae24ed4c2957e82ac0d75265bb469a2d1", size = 165545, upload-time = "2026-10-27T21:01:09.847Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/db/7e/1c79351b909a5f39c0b03b783d5d56e54e1e7482ea81f90f6b80746a8d4e/django_tailwind_cli-4.8.2-py3-none-any.whl", hash = "sha256:42d4ead7efb1b1fec92c82ef49c1426a72ef369f87f2d76a25eead42cb6634ea", size = 50675, upload-time = "2026-10-27T21:01:07.197Z" },
+]
+
+[[package]]
+name = "django-tenants"
+version = "4.0.6"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/26/81/9939b4d9aeff475630cba40a0b938bfa95eeae449520f6088621062a292d/django_tenants-4.0.6.tar.gz", hash = "sha256:226f313840d113fa3f2b68a7d2fec26cd6bc457a3259c732c640cdb9e3e3ebb6", size = 191696, upload-time = "2026-11-18T11:50:52.025Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/23/d6/effb6e55c9c65875252b9733c8d591d3668979d9f6898cc5925b5f4e52e7/django_tenants-4.0.6-py3-none-any.whl", hash = "sha256:e261b6eb6a2117460be32812aa4ca6bbe6f9afb3c7f51eef740289484e56ff3d", size = 147128, upload-time = "2026-11-18T11:50:50.645Z" },
 ]
 
 [[package]]

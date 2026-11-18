@@ -10,6 +10,9 @@ from pytest_django.asserts import assertRedirects
 
 from apps.accounts.models import User
 
+# The admin is served on the root domain only.
+pytestmark = pytest.mark.usefixtures("public_urls")
+
 
 class TestUserAdmin:
     def test_changelist(self, admin_client):

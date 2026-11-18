@@ -52,6 +52,8 @@ on the host through `uv`.
 | `NoReverseMatch` right after pulling or adding a URL | The dev server did not reload `urls.py`: `docker compose -f docker-compose.local.yml restart django` |
 | New Tailwind classes have no effect | Check `docker compose ... logs tailwind`; templates must sit under `apps/**/templates` |
 | A test passes alone but fails in the full run | Leaked state between tests. The root `conftest.py` resets the active language; add similar resets there |
+| Tests fail with "A schema named 'ws_…' already exists" | An aborted run left a workspace schema in the reused test DB. Rebuild it once: `docker compose -f docker-compose.local.yml run --rm django pytest --create-db` |
+| `NoReverseMatch` for `admin:` (or another root-only page) in a test | Outside a request, `reverse()` uses the workspace URLconf. Add `pytestmark = pytest.mark.usefixtures("public_urls")` |
 | "Un instant, s'il vous plaît" (429) while testing | Rate limits (waitlist 5/h per IP, allauth code resends). Restart Django or clear the cache: `... run --rm django python manage.py shell -c "from django.core.cache import cache; cache.clear()"` |
 | Need a verification or sign-in code | Mailpit, or `curl -s localhost:8025/api/v1/messages` |
 | SIRET lookup never shows | Expected without `SIRENE_API_KEY`: lookup is off and signup uses manual entry |

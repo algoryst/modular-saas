@@ -4,7 +4,9 @@ import pytest
 from django.db import connection
 from django.db.migrations.executor import MigrationExecutor
 
-pytestmark = pytest.mark.django_db(transaction=True)
+# serialized_rollback: transactional tests truncate every table afterwards; this
+# restores rows created by data migrations (public tenant, Site) for later tests.
+pytestmark = pytest.mark.django_db(transaction=True, serialized_rollback=True)
 
 
 def _migrate(*targets: tuple[str, str]):

@@ -10,6 +10,7 @@ type = independence
 modules =
     apps.accounts
     apps.marketing
+    apps.tenants
 
 # core is the shared kernel: every app may import it, it imports no feature app.
 # Add every new feature app here.
@@ -22,6 +23,7 @@ forbidden_modules =
     apps.accounts
     apps.countrypacks
     apps.marketing
+    apps.tenants
 
 # Country packs never import each other; shared types live in countrypacks.base.
 # Add every new pack here.
@@ -46,3 +48,4 @@ layers =
 containers =
     apps.accounts
     apps.marketing
+    apps.tenants

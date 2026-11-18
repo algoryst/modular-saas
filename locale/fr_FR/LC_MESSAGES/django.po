@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-18 15:36+0100\n"
+"POT-Creation-Date: 2026-11-18 15:59+0100\n"
 "Language: fr-FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -107,16 +107,21 @@ msgstr "Un numéro %(name)s ne contient que des chiffres."
 #: apps/countrypacks/fr/identifiers.py:43
 #, python-format
 msgid "A %(name)s has %(length)d digits; you entered %(count)d."
-msgstr "Un numéro %(name)s comporte %(length)d chiffres ; vous en avez saisi %(count)d."
+msgstr ""
+"Un numéro %(name)s comporte %(length)d chiffres ; vous en avez saisi "
+"%(count)d."
 
 #: apps/countrypacks/fr/identifiers.py:51
 #, python-format
 msgid "This %(name)s number is not valid. Check for a typo."
-msgstr "Ce numéro %(name)s n'est pas valide. Vérifiez qu'il n'y a pas de faute de frappe."
+msgstr ""
+"Ce numéro %(name)s n'est pas valide. Vérifiez qu'il n'y a pas de faute de "
+"frappe."
 
 #: apps/countrypacks/fr/identifiers.py:85
 msgid "A French VAT number looks like FR 12 345678901 (FR, 2 digits, SIREN)."
-msgstr "Un numéro de TVA français a la forme FR 12 345678901 (FR, 2 chiffres, SIREN)."
+msgstr ""
+"Un numéro de TVA français a la forme FR 12 345678901 (FR, 2 chiffres, SIREN)."
 
 #: apps/countrypacks/fr/identifiers.py:89
 msgid "VAT"
@@ -681,6 +686,78 @@ msgstr "Afficher le mot de passe"
 #: apps/templates/components/language_switcher.html:8
 msgid "Language"
 msgstr "Langue"
+
+#: apps/tenants/apps.py:7
+msgid "Workspaces"
+msgstr "Espaces de travail"
+
+#: apps/tenants/models.py:16
+msgid "name"
+msgstr "nom"
+
+#: apps/tenants/models.py:18
+msgid "time zone"
+msgstr "fuseau horaire"
+
+#: apps/tenants/models.py:19
+msgid "currency"
+msgstr "devise"
+
+#: apps/tenants/models.py:26 apps/tenants/models.py:40
+#: apps/tenants/models.py:67
+msgid "workspace"
+msgstr "espace de travail"
+
+#: apps/tenants/models.py:27
+msgid "workspaces"
+msgstr "espaces de travail"
+
+#: apps/tenants/models.py:47
+msgid "domain"
+msgstr "domaine"
+
+#: apps/tenants/models.py:48
+msgid "domains"
+msgstr "domaines"
+
+#: apps/tenants/models.py:55
+msgid "Owner"
+msgstr "Propriétaire"
+
+#: apps/tenants/models.py:56
+msgid "Admin"
+msgstr "Administrateur"
+
+#: apps/tenants/models.py:57
+msgid "Member"
+msgstr "Membre"
+
+#: apps/tenants/models.py:61
+msgid "user"
+msgstr "utilisateur"
+
+#: apps/tenants/models.py:71
+msgid "role"
+msgstr "rôle"
+
+#: apps/tenants/models.py:74
+msgid "membership"
+msgstr "adhésion"
+
+#: apps/tenants/models.py:75
+msgid "memberships"
+msgstr "adhésions"
+
+#: apps/tenants/templates/tenants/home.html:6
+#, python-format
+msgid "Welcome to %(name)s"
+msgstr "Bienvenue dans %(name)s"
+
+#: apps/tenants/templates/tenants/home.html:8
+msgid ""
+"Your workspace is ready. Contacts, quotes and invoices will appear here as "
+"they arrive."
+msgstr "Votre espace de travail est prêt. Vos contacts, devis et factures apparaîtront ici au fur et à mesure."
 
 #: config/settings/base.py:37
 msgid "English"

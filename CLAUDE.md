@@ -75,7 +75,7 @@ Run these through make. All of them must pass before you say a task is done.
 
 ## Multi-tenancy (django-tenants)
 
-- Public schema holds only Tenant and Domain. Every other app is a tenant app. An app listed in neither SHARED_APPS nor TENANT_APPS gets no tables.
+- Public schema holds Tenant, Domain, User, Membership and the auth, session and allauth tables. Business data lives only in tenant schemas (feature apps go in TENANT_APPS). An app listed in neither SHARED_APPS nor TENANT_APPS gets no tables.
 - Run `migrate_schemas`, never plain `migrate`, in docs, scripts and CI.
 - Outside a request, wrap tenant work in `tenant_context` or `schema_context`. Code after the block runs in whatever schema was active before it.
 - Every Celery task receives a tenant identifier and sets the tenant context itself. Test this.

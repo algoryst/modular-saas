@@ -42,6 +42,12 @@ TEMPLATES[0]["OPTIONS"]["debug"] = True  # type: ignore[index]
 MEDIA_URL = "http://media.testserver/"
 # Your stuff...
 # ------------------------------------------------------------------------------
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "KEY_FUNCTION": "django_tenants.cache.make_key",
+    },
+}
 # LocMemCache is per-process, so django-ratelimit flags it as not shared. That is
 # fine for a single dev/test process; production uses Redis.
 SILENCED_SYSTEM_CHECKS = ["django_ratelimit.E003", "django_ratelimit.W001"]

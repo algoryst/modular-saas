@@ -26,6 +26,8 @@ CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": REDIS_URL,
+        # Prefix keys with the schema: workspaces never share cache entries.
+        "KEY_FUNCTION": "django_tenants.cache.make_key",
         "OPTIONS": {
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
             # Mimicking memcache behavior.
