@@ -11,6 +11,17 @@ modules =
     apps.accounts
     apps.marketing
 
+# core is the shared kernel: every app may import it, it imports no feature app.
+# Add every new feature app here.
+[importlinter:contract:core-is-kernel]
+name = Core imports no feature app
+type = forbidden
+source_modules =
+    apps.core
+forbidden_modules =
+    apps.accounts
+    apps.marketing
+
 # view -> form -> service -> repository -> model, inside each app.
 # Parentheses mark layers an app may not have yet. Add every new app to containers.
 [importlinter:contract:layers]

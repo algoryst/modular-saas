@@ -102,6 +102,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
+    "apps.core",
     "apps.accounts",
     "apps.marketing",
     # Your stuff: custom apps go here
