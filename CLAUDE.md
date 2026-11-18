@@ -68,6 +68,11 @@ Run these through make. All of them must pass before you say a task is done.
 - Datetimes are timezone-aware. Use an injected clock, never `datetime.now()` in services.
 - Settings come from environment variables. No secrets in the repo. `DEBUG` is false by default.
 
+## User experience (priority)
+
+- Making the user's life simpler is a priority: fewer steps, fields and decisions, plain words, no dead ends.
+- When you see a change that would do that, even outside the current task, propose it with its trade-off. Implement it only after the user confirms.
+
 ## Multi-tenancy (django-tenants)
 
 - Public schema holds only Tenant and Domain. Every other app is a tenant app. An app listed in neither SHARED_APPS nor TENANT_APPS gets no tables.
