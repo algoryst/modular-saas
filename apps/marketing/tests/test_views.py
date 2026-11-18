@@ -93,12 +93,17 @@ def test_landing_post_honeypot_pretends_success_without_enqueue(client, enqueue)
 
 
 @pytest.mark.usefixtures("waitlist_open")
-def test_landing_post_over_rate_limit_is_rejected(client, settings, enqueue):
+def test_landing_post_over_rate_limit_shows_friendly_wait_page(
+    client, settings, enqueue, django_capture_on_commit_callbacks
+):
     settings.WAITLIST_RATE_LIMIT = "2/h"
 
-    statuses = [client.post(reverse("home"), VALID).status_code for _ in range(3)]
+    with django_capture_on_commit_callbacks(execute=True):
+        responses = [client.post(reverse("home"), VALID) for _ in range(3)]
 
-    assert statuses == [302, 302, 403]
+    assert [r.status_code for r in responses] == [302, 302, 429]
+    assert "429.html" in [t.name for t in responses[-1].templates]
+    assert enqueue.call_count == 2
 
 
 @pytest.mark.parametrize("name", ["marketing:legal_notice", "marketing:privacy"])

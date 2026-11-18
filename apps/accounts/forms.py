@@ -7,6 +7,7 @@ from allauth.account.forms import (
     LoginForm,
     RequestLoginCodeForm,
     ResetPasswordForm,
+    ResetPasswordKeyForm,
     SignupForm,
 )
 from allauth.socialaccount.forms import SignupForm as SocialSignupForm
@@ -93,6 +94,15 @@ class UserSignupForm(PlainFieldsMixin, SignupForm):
 
 class UserResetPasswordForm(PlainFieldsMixin, ResetPasswordForm):
     pass
+
+
+class UserResetPasswordKeyForm(PlainFieldsMixin, ResetPasswordKeyForm):
+    """New password once; the show/hide toggle replaces typing it again."""
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+        del self.fields["password2"]
+        self.fields["password1"].help_text = password_help_text()
 
 
 class UserRequestLoginCodeForm(PlainFieldsMixin, RequestLoginCodeForm):

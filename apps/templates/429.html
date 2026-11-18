@@ -2,10 +2,10 @@
 {% load i18n %}
 {% block title %}{% translate "One moment, please" %}{% endblock title %}
 {% block content %}
-  {# Rendered by allauth's rate limiter, e.g. "Send a new code" clicked twice in a row. #}
+  {# Rendered for allauth's and django-ratelimit's limits (resend code, waitlist, ...). #}
   <h1 class="text-2xl font-semibold">{% translate "One moment, please" %}</h1>
   <p class="mt-2 text-zinc-600">
-    {% translate "You tried that several times in a short time. Wait a few seconds, then try again." %}
+    {% translate "You tried that several times in a short time. Wait a little, then try again." %}
   </p>
   <a class="mt-4 inline-block text-sm font-medium text-blue-600 hover:text-blue-700"
      href="{{ request.path }}">{% translate "Try again" %}</a>

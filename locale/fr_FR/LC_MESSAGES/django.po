@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-18 14:50+0100\n"
+"POT-Creation-Date: 2026-11-18 14:54+0100\n"
 "Language: fr-FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,19 +30,19 @@ msgstr "Dates importantes"
 msgid "Accounts"
 msgstr "Comptes"
 
-#: apps/accounts/forms.py:42 apps/accounts/tests/test_forms.py:41
+#: apps/accounts/forms.py:43 apps/accounts/tests/test_forms.py:41
 msgid "This email has already been taken."
 msgstr "Cette adresse e-mail est déjà utilisée."
 
-#: apps/accounts/forms.py:57
+#: apps/accounts/forms.py:58
 msgid "Email address"
 msgstr "Adresse e-mail"
 
-#: apps/accounts/forms.py:71
+#: apps/accounts/forms.py:72
 msgid "Avoid common or all-number passwords."
 msgstr "Évitez les mots de passe courants ou composés uniquement de chiffres."
 
-#: apps/accounts/forms.py:73
+#: apps/accounts/forms.py:74
 #, python-format
 msgid ""
 "At least %(min_length)d characters. Avoid common or all-number passwords."
@@ -357,11 +357,8 @@ msgstr "Un instant, s'il vous plaît"
 
 #: apps/templates/429.html:8
 msgid ""
-"You tried that several times in a short time. Wait a few seconds, then try "
-"again."
-msgstr ""
-"Vous avez essayé plusieurs fois en peu de temps. Patientez quelques "
-"secondes, puis réessayez."
+"You tried that several times in a short time. Wait a little, then try again."
+msgstr "Vous avez essayé plusieurs fois en peu de temps. Patientez un peu, puis réessayez."
 
 #: apps/templates/429.html:11
 msgid "Try again"
@@ -469,6 +466,29 @@ msgid ""
 msgstr ""
 "Vous vous en souvenez ? <a class=\"font-medium text-blue-600 hover:"
 "underline\" href=\"%(login_url)s\">Se connecter</a>"
+
+#: apps/templates/account/password_reset_from_key.html:3
+#: apps/templates/account/password_reset_from_key.html:14
+msgid "Choose a new password"
+msgstr "Choisissez un nouveau mot de passe"
+
+#: apps/templates/account/password_reset_from_key.html:6
+msgid "This link no longer works"
+msgstr "Ce lien ne fonctionne plus"
+
+#: apps/templates/account/password_reset_from_key.html:8
+msgid ""
+"Reset links work only once and expire after a while. Ask for a new one, it "
+"takes a few seconds."
+msgstr "Les liens de réinitialisation ne servent qu'une fois et expirent au bout d'un moment. Demandez-en un nouveau, cela ne prend que quelques secondes."
+
+#: apps/templates/account/password_reset_from_key.html:11
+msgid "Send me a new link"
+msgstr "M'envoyer un nouveau lien"
+
+#: apps/templates/account/password_reset_from_key.html:22
+msgid "Save new password"
+msgstr "Enregistrer le nouveau mot de passe"
 
 #: apps/templates/account/request_login_code.html:7
 msgid ""
@@ -708,9 +728,6 @@ msgstr "Français"
 #~ "parce qu'il a déjà été utilisé. Veuillez faire une <a "
 #~ "href=\"%(passwd_reset_url)s\"> nouvelle demande de réinitialisation de "
 #~ "mot de passe</a>."
-
-#~ msgid "change password"
-#~ msgstr "changer le mot de passe"
 
 #~ msgid "Your password is now changed."
 #~ msgstr "Votre mot de passe est maintenant modifié."

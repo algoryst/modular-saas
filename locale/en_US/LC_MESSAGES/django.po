@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-18 14:50+0100\n"
+"POT-Creation-Date: 2026-11-18 14:54+0100\n"
 "Language: en-US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,19 +29,19 @@ msgstr ""
 msgid "Accounts"
 msgstr ""
 
-#: apps/accounts/forms.py:42 apps/accounts/tests/test_forms.py:41
+#: apps/accounts/forms.py:43 apps/accounts/tests/test_forms.py:41
 msgid "This email has already been taken."
 msgstr ""
 
-#: apps/accounts/forms.py:57
+#: apps/accounts/forms.py:58
 msgid "Email address"
 msgstr ""
 
-#: apps/accounts/forms.py:71
+#: apps/accounts/forms.py:72
 msgid "Avoid common or all-number passwords."
 msgstr ""
 
-#: apps/accounts/forms.py:73
+#: apps/accounts/forms.py:74
 #, python-format
 msgid ""
 "At least %(min_length)d characters. Avoid common or all-number passwords."
@@ -330,8 +330,7 @@ msgstr ""
 
 #: apps/templates/429.html:8
 msgid ""
-"You tried that several times in a short time. Wait a few seconds, then try "
-"again."
+"You tried that several times in a short time. Wait a little, then try again."
 msgstr ""
 
 #: apps/templates/429.html:11
@@ -430,6 +429,29 @@ msgstr ""
 msgid ""
 "Remembered it? <a class=\"font-medium text-blue-600 hover:underline\" "
 "href=\"%(login_url)s\">Sign in</a>"
+msgstr ""
+
+#: apps/templates/account/password_reset_from_key.html:3
+#: apps/templates/account/password_reset_from_key.html:14
+msgid "Choose a new password"
+msgstr ""
+
+#: apps/templates/account/password_reset_from_key.html:6
+msgid "This link no longer works"
+msgstr ""
+
+#: apps/templates/account/password_reset_from_key.html:8
+msgid ""
+"Reset links work only once and expire after a while. Ask for a new one, it "
+"takes a few seconds."
+msgstr ""
+
+#: apps/templates/account/password_reset_from_key.html:11
+msgid "Send me a new link"
+msgstr ""
+
+#: apps/templates/account/password_reset_from_key.html:22
+msgid "Save new password"
 msgstr ""
 
 #: apps/templates/account/request_login_code.html:7

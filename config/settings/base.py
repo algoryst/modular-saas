@@ -168,6 +168,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",
+    # Turns django-ratelimit blocks into the friendly 429 page (RATELIMIT_VIEW).
+    "django_ratelimit.middleware.RatelimitMiddleware",
 ]
 
 # STATIC
@@ -366,6 +368,7 @@ ACCOUNT_FORMS = {
         "apps.accounts.forms.UserConfirmEmailVerificationCodeForm"
     ),
     "change_email": "apps.accounts.forms.UserChangeEmailForm",
+    "reset_password_from_key": "apps.accounts.forms.UserResetPasswordKeyForm",
 }
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
 SOCIALACCOUNT_ADAPTER = "apps.accounts.adapters.SocialAccountAdapter"
@@ -413,3 +416,5 @@ BREVO_DOI_TEMPLATE_ID = env.int("BREVO_DOI_TEMPLATE_ID", default=0)
 # Absolute URL Brevo redirects to once the double opt-in link is clicked.
 WAITLIST_CONFIRMED_URL = env("WAITLIST_CONFIRMED_URL", default="")
 WAITLIST_RATE_LIMIT = env("WAITLIST_RATE_LIMIT", default="5/h")
+# django-ratelimit: render a "wait a moment" page instead of 403 "Access denied".
+RATELIMIT_VIEW = "apps.core.views.ratelimited"
