@@ -133,9 +133,9 @@ no_implicit_reexport = true
 [[tool.mypy.overrides]]
 # Tests follow the global settings, not the strict kernel rules above.
 module = [ "apps.core.tests.*", "apps.countrypacks.tests.*" ]
+disallow_untyped_calls = false
 disallow_untyped_defs = false
 disallow_incomplete_defs = false
-disallow_untyped_calls = false
 disallow_untyped_decorators = false
 
 [tool.django-stubs]

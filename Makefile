@@ -5,7 +5,7 @@ RUN := $(COMPOSE) run --rm django
 # Host-side tools load Django settings but never connect; give them a placeholder DB.
 HOST := DATABASE_URL=postgres://unused:unused@localhost:5432/unused uv run --quiet
 
-check: lint types django-check migrations-check test
+check: lint types security django-check migrations-check test
 
 fmt:
 	uv run --quiet black .

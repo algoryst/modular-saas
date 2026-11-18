@@ -15,7 +15,7 @@ The plan documents are locked decisions. If one looks wrong, say so and wait. Do
 
 Run these through make. All of them must pass before you say a task is done.
 
-- `make check` runs the whole gate: lint, types, django check, migration check, tests
+- `make check` runs the whole gate: lint, types, security, django check, migration check, tests
 - `make fmt` black + isort
 - `make lint` black --check, isort --check, flake8, import-linter
 - `make types` mypy

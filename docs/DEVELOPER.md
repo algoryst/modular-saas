@@ -42,7 +42,7 @@ Stop with `make down`.
 
 | Command | Does |
 |---|---|
-| `make check` | The gate: lint, types, Django check, migration check, tests + coverage. Must pass before a commit |
+| `make check` | The gate: lint, types, security (bandit, pip-audit), Django check, migration check, tests + coverage. Must pass before a commit |
 | `make migrate` | `migrate_schemas` (never plain `migrate`): public schema, then every workspace |
 | `make test-one T=path::test_name` | One test, no coverage |
 | `make fmt` | black + isort |
