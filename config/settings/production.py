@@ -47,6 +47,10 @@ SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_NAME = "__Secure-sessionid"
 # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-secure
 CSRF_COOKIE_SECURE = True
+# https://docs.djangoproject.com/en/dev/ref/settings/#language-cookie-secure
+LANGUAGE_COOKIE_SECURE = True
+# https://docs.djangoproject.com/en/dev/ref/settings/#language-cookie-httponly
+LANGUAGE_COOKIE_HTTPONLY = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-name
 CSRF_COOKIE_NAME = "__Secure-csrftoken"
 # https://docs.djangoproject.com/en/dev/topics/security/#ssl-https

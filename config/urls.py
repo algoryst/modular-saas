@@ -23,6 +23,8 @@ urlpatterns = [
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
     path("", include("apps.marketing.urls", namespace="marketing")),
+    # set_language: stores the visitor's language choice in a cookie.
+    path("i18n/", include("django.conf.urls.i18n")),
     # Media files
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]

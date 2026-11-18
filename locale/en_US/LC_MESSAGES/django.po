@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-18 11:20+0000\n"
+"POT-Creation-Date: 2026-11-18 11:28+0000\n"
 "Language: en-US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -149,7 +149,7 @@ msgstr ""
 
 #: apps/marketing/templates/marketing/legal_notice.html:3
 #: apps/marketing/templates/marketing/legal_notice.html:7
-#: apps/templates/base.html:54
+#: apps/templates/base.html:55
 msgid "Legal notice"
 msgstr ""
 
@@ -195,7 +195,7 @@ msgstr ""
 
 #: apps/marketing/templates/marketing/privacy.html:3
 #: apps/marketing/templates/marketing/privacy.html:7
-#: apps/templates/base.html:55
+#: apps/templates/base.html:56
 msgid "Privacy notice"
 msgstr ""
 
@@ -232,18 +232,29 @@ msgid "[List: Brevo (email), hosting provider, ...]"
 msgstr ""
 
 #: apps/marketing/templates/marketing/privacy.html:24
-msgid "Audience measurement"
+msgid "Cookies"
 msgstr ""
 
-#: apps/marketing/templates/marketing/privacy.html:25
-msgid "[Analytics tool and its CNIL-exempt configuration]"
-msgstr ""
-
-#: apps/marketing/templates/marketing/privacy.html:28
-msgid "Your rights"
+#: apps/marketing/templates/marketing/privacy.html:26
+msgid ""
+"We only set cookies that are strictly necessary: your session, protection "
+"against forged requests, and, if you choose a language, a cookie that "
+"remembers that choice."
 msgstr ""
 
 #: apps/marketing/templates/marketing/privacy.html:30
+msgid "Audience measurement"
+msgstr ""
+
+#: apps/marketing/templates/marketing/privacy.html:31
+msgid "[Analytics tool and its CNIL-exempt configuration]"
+msgstr ""
+
+#: apps/marketing/templates/marketing/privacy.html:34
+msgid "Your rights"
+msgstr ""
+
+#: apps/marketing/templates/marketing/privacy.html:36
 msgid ""
 "You can access, correct or delete your data by writing to [contact email]. "
 "You can also lodge a complaint with the CNIL."
@@ -297,7 +308,7 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: apps/templates/allauth/layouts/entrance.html:3 apps/templates/base.html:36
+#: apps/templates/allauth/layouts/entrance.html:3 apps/templates/base.html:37
 msgid "Sign In"
 msgstr ""
 
@@ -309,18 +320,30 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: apps/templates/base.html:29
+#: apps/templates/base.html:30
 msgid "My Profile"
 msgstr ""
 
-#: apps/templates/base.html:31
+#: apps/templates/base.html:32
 msgid "Sign Out"
 msgstr ""
 
-#: apps/templates/base.html:40
+#: apps/templates/base.html:41
 msgid "Sign Up"
 msgstr ""
 
 #: apps/templates/components/form_field.html:21
 msgid "Show password"
+msgstr ""
+
+#: apps/templates/components/language_switcher.html:8
+msgid "Language"
+msgstr ""
+
+#: config/settings/base.py:36
+msgid "English"
+msgstr ""
+
+#: config/settings/base.py:37
+msgid "French"
 msgstr ""

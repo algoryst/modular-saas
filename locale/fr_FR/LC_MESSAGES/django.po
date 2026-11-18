@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-18 11:20+0000\n"
+"POT-Creation-Date: 2026-11-18 11:28+0000\n"
 "Language: fr-FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -163,7 +163,7 @@ msgstr ""
 
 #: apps/marketing/templates/marketing/legal_notice.html:3
 #: apps/marketing/templates/marketing/legal_notice.html:7
-#: apps/templates/base.html:54
+#: apps/templates/base.html:55
 msgid "Legal notice"
 msgstr "Mentions légales"
 
@@ -209,7 +209,7 @@ msgstr "[Nom, adresse et téléphone de l'hébergeur]"
 
 #: apps/marketing/templates/marketing/privacy.html:3
 #: apps/marketing/templates/marketing/privacy.html:7
-#: apps/templates/base.html:55
+#: apps/templates/base.html:56
 msgid "Privacy notice"
 msgstr "Politique de confidentialité"
 
@@ -251,18 +251,29 @@ msgid "[List: Brevo (email), hosting provider, ...]"
 msgstr "[Liste : Brevo (e-mail), hébergeur, ...]"
 
 #: apps/marketing/templates/marketing/privacy.html:24
+msgid "Cookies"
+msgstr "Cookies"
+
+#: apps/marketing/templates/marketing/privacy.html:26
+msgid ""
+"We only set cookies that are strictly necessary: your session, protection "
+"against forged requests, and, if you choose a language, a cookie that "
+"remembers that choice."
+msgstr "Nous ne déposons que des cookies strictement nécessaires : votre session, la protection contre les requêtes falsifiées et, si vous choisissez une langue, un cookie qui mémorise ce choix."
+
+#: apps/marketing/templates/marketing/privacy.html:30
 msgid "Audience measurement"
 msgstr "Mesure d'audience"
 
-#: apps/marketing/templates/marketing/privacy.html:25
+#: apps/marketing/templates/marketing/privacy.html:31
 msgid "[Analytics tool and its CNIL-exempt configuration]"
 msgstr "[Outil de mesure d'audience et sa configuration exemptée CNIL]"
 
-#: apps/marketing/templates/marketing/privacy.html:28
+#: apps/marketing/templates/marketing/privacy.html:34
 msgid "Your rights"
 msgstr "Vos droits"
 
-#: apps/marketing/templates/marketing/privacy.html:30
+#: apps/marketing/templates/marketing/privacy.html:36
 msgid ""
 "You can access, correct or delete your data by writing to [contact email]. "
 "You can also lodge a complaint with the CNIL."
@@ -319,7 +330,7 @@ msgstr "Authentification à deux facteurs"
 msgid "Save"
 msgstr "Enregistrer"
 
-#: apps/templates/allauth/layouts/entrance.html:3 apps/templates/base.html:36
+#: apps/templates/allauth/layouts/entrance.html:3 apps/templates/base.html:37
 msgid "Sign In"
 msgstr "S'identifier"
 
@@ -331,21 +342,33 @@ msgstr "Principal"
 msgid "About"
 msgstr "À propos"
 
-#: apps/templates/base.html:29
+#: apps/templates/base.html:30
 msgid "My Profile"
 msgstr "Mon Profil"
 
-#: apps/templates/base.html:31
+#: apps/templates/base.html:32
 msgid "Sign Out"
 msgstr "Se déconnecter"
 
-#: apps/templates/base.html:40
+#: apps/templates/base.html:41
 msgid "Sign Up"
 msgstr "S'inscrire"
 
 #: apps/templates/components/form_field.html:21
 msgid "Show password"
 msgstr "Afficher le mot de passe"
+
+#: apps/templates/components/language_switcher.html:8
+msgid "Language"
+msgstr "Langue"
+
+#: config/settings/base.py:36
+msgid "English"
+msgstr "Anglais"
+
+#: config/settings/base.py:37
+msgid "French"
+msgstr "Français"
 
 #~ msgid "Account Inactive"
 #~ msgstr "Compte inactif"

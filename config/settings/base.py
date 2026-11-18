@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any
 
 import environ
+from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # apps/
@@ -29,12 +30,12 @@ TIME_ZONE = "UTC"
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
 LANGUAGE_CODE = "en-us"
 # https://docs.djangoproject.com/en/dev/ref/settings/#languages
-# from django.utils.translation import gettext_lazy as _
-# LANGUAGES = [
-#     ('en', _('English')),
-#     ('fr-fr', _('French')),
-#     ('pt-br', _('Portuguese')),
-# ]
+# Without a choice, LocaleMiddleware negotiates from the browser's Accept-Language
+# and falls back to LANGUAGE_CODE. The switcher's set_language cookie overrides both.
+LANGUAGES = [
+    ("en", _("English")),
+    ("fr", _("French")),
+]
 # https://docs.djangoproject.com/en/dev/ref/settings/#site-id
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
