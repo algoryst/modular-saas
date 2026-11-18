@@ -1,13 +1,10 @@
 {% extends "base.html" %}
-
-{% block title %}Page not found{% endblock title %}
+{% load i18n %}
+{% block title %}{% translate "Page not found" %}{% endblock title %}
 {% block content %}
-  <h1>Page not found</h1>
-  <p>
-    {% if exception %}
-      {{ exception }}
-    {% else %}
-      This is not the page you were looking for.
-    {% endif %}
+  <h1 class="text-2xl font-semibold">{% translate "Page not found" %}</h1>
+  <p class="mt-2 text-zinc-600">
+    {% if exception %}{{ exception }}{% else %}{% translate "This page doesn't exist or has moved." %}{% endif %}
   </p>
+  <a class="mt-4 inline-block text-sm font-medium text-blue-600 hover:text-blue-700" href="{% url 'home' %}">{% translate "Back to home" %}</a>
 {% endblock content %}

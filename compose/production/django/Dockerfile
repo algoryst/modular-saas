@@ -89,4 +89,9 @@ RUN DATABASE_URL="postgres://dummy" \
   DJANGO_SETTINGS_MODULE="config.settings.test" \
   python manage.py compilemessages
 
+# Build Tailwind CSS before collectstatic runs at container start.
+RUN DATABASE_URL="postgres://dummy" \
+  DJANGO_SETTINGS_MODULE="config.settings.test" \
+  python manage.py tailwind build
+
 ENTRYPOINT ["/entrypoint"]

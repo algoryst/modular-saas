@@ -1,0 +1,20 @@
+{# One form field: label, widget, help text, errors. Expects `field` (a BoundField). #}
+{% if field.is_hidden %}
+  {{ field }}
+{% else %}
+  <div class="form-field space-y-1">
+    {% if field.widget_type == "checkbox" %}
+      <label class="flex items-center gap-2 text-sm text-zinc-700">
+        {{ field }}
+        {{ field.label }}
+      </label>
+    {% else %}
+      <label for="{{ field.id_for_label }}"
+             class="block text-sm font-medium text-zinc-700">{{ field.label }}</label>
+      {{ field }}
+    {% endif %}
+    {# allow-safe: help_text is set in code (e.g. Django's password help lists), never by users. #}
+    {% if field.help_text %}<p class="text-xs text-zinc-500">{{ field.help_text|safe }}</p>{% endif %}
+    {% for error in field.errors %}<p class="text-sm text-red-600">{{ error }}</p>{% endfor %}
+  </div>
+{% endif %}

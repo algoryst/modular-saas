@@ -50,6 +50,15 @@ services:
     volumes:
       - apps_local_redis_data:/data
 
+  tailwind:
+    <<: *django
+    image: apps_local_tailwind
+    container_name: apps_local_tailwind
+    ports: []
+    # Tailwind's watcher exits when stdin closes; a TTY keeps it running.
+    tty: true
+    command: python manage.py tailwind watch
+
   celeryworker:
     <<: *django
     image: apps_local_celeryworker

@@ -1,4 +1,4 @@
-.PHONY: check fmt lint types security django-check migrations-check test test-one up down build messages
+.PHONY: check fmt lint types security django-check migrations-check test test-one up down build messages css
 
 COMPOSE := docker compose -f docker-compose.local.yml
 RUN := $(COMPOSE) run --rm django
@@ -48,3 +48,6 @@ build:
 
 messages:
 	$(RUN) sh -c "python manage.py makemessages -l fr_FR -l en_US --ignore=.venv && python manage.py compilemessages"
+
+css:
+	$(RUN) python manage.py tailwind build

@@ -1,0 +1,9 @@
+{% if messages %}
+  <ul class="mb-6 space-y-2" role="status">
+    {% for message in messages %}
+      <li class="rounded-lg border px-4 py-3 text-sm {% if message.level_tag == 'error' %}border-red-200 bg-red-50 text-red-800{% elif message.level_tag == 'warning' %}border-amber-200 bg-amber-50 text-amber-800{% elif message.level_tag == 'success' %}border-green-200 bg-green-50 text-green-800{% else %}border-zinc-200 bg-white text-zinc-700{% endif %}">
+        {{ message }}
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}

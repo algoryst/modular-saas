@@ -144,6 +144,7 @@ Signups, trial-to-paid %, MRR, churn, support hours per week, test coverage, CI 
 | Date | Done | Next |
 |---|---|---|
 | 2026-11-18 | cookiecutter-django skeleton (Python 3.14, Django 6.0, package `apps`); ruff/djlint swapped for black, isort, flake8; Makefile with `make check`; per-layer coverage gates; pre-commit; GitHub Actions CI (not yet run: no remote) | Claude Code guardrails item: `.importlinter`, day-one verification (ENFORCEMENT §9) |
+| 2026-11-18 | Early decisions applied: ATOMIC_REQUESTS off; `users` app renamed `accounts`; Bootstrap/crispy replaced by Tailwind (django-tailwind-cli, Tailwind 4.3.4 pinned), shared partials for fields, messages, buttons; WhiteNoise off in tests | Claude Code guardrails item; user to log decisions (allauth MFA, Tailwind CLI) in Decisions Log and ARCHITECTURE §2 |
 
 ## Session Starter Prompt
 

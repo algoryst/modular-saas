@@ -12,3 +12,7 @@ venv
 .envs/
 .venv/
 **/__pycache__/
+
+# Tailwind: host-platform binary and generated CSS are rebuilt inside images
+.django_tailwind_cli
+apps/static/css/tailwind.css

@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@source "../apps/templates";
+
+/* Design tokens: docs/ARCHITECTURE.md section 10 (Zinc neutrals, Blue 600 primary,
+   8 px radius = rounded-lg, one shadow level = shadow-sm). Inter is self-hosted in W7;
+   until then the system stack applies. */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Django renders form widgets itself, so their markup cannot carry utility classes.
+   This is the one place controls get styled; templates/components/form_field.html
+   wraps every field in .form-field. */
+@layer components {
+  .form-field input:not([type="checkbox"], [type="radio"]),
+  .form-field select,
+  .form-field textarea {
+    @apply block w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 focus:outline-none;
+  }
+
+  .form-field input[type="checkbox"],
+  .form-field input[type="radio"] {
+    @apply size-4 border-zinc-300 text-blue-600 focus:ring-blue-600;
+  }
+}

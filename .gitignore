@@ -281,3 +281,7 @@ apps/media/
 .ipython/
 .env
 .envs/*
+
+# Tailwind: downloaded CLI binary and generated CSS
+.django_tailwind_cli/
+apps/static/css/tailwind.css

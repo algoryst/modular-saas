@@ -87,8 +87,7 @@ DJANGO_APPS = [
     "django.forms",
 ]
 THIRD_PARTY_APPS = [
-    "crispy_forms",
-    "crispy_bootstrap5",
+    "django_tailwind_cli",
     "allauth",
     "allauth.account",
     "allauth.mfa",
@@ -215,9 +214,12 @@ TEMPLATES = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#form-renderer
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
-# http://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
-CRISPY_TEMPLATE_PACK = "bootstrap5"
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+# django-tailwind-cli: standalone Tailwind binary, no Node.
+# Pinned so builds are reproducible and templates never query GitHub for "latest".
+TAILWIND_CLI_VERSION = "4.3.4"
+# Outside STATICFILES_DIRS so collectstatic never ships the raw @import source.
+TAILWIND_CLI_SRC_CSS = "tailwind/source.css"
+TAILWIND_CLI_DIST_CSS = "css/tailwind.css"
 
 # FIXTURES
 # ------------------------------------------------------------------------------
