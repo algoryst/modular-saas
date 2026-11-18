@@ -12,7 +12,8 @@ SECRET_KEY = env(
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 # 0.0.0.0 lets the dev server answer inside Docker; local settings only.
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]  # nosec
+# ".localhost" covers workspace subdomains (acme.localhost).
+ALLOWED_HOSTS = ["localhost", ".localhost", "0.0.0.0", "127.0.0.1"]  # nosec
 
 # CACHES
 # ------------------------------------------------------------------------------

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "No access to this workspace" %}{% endblock title %}
+{% block content %}
+  <div class="mx-auto max-w-md rounded-lg border border-zinc-200 bg-white p-6 shadow-sm">
+    <h1 class="text-2xl font-semibold">{% translate "No access to this workspace" %}</h1>
+    <p class="mt-2 text-sm text-zinc-600">
+      {% blocktranslate trimmed with email=request.user.email %}
+        You are signed in as {{ email }}, which is not a member of this workspace. Ask someone who uses it to invite you, or go back to your own workspaces.
+      {% endblocktranslate %}
+    </p>
+    <div class="mt-4">
+      {% translate "Go to my workspaces" as back_label %}
+      {% include "components/link_button.html" with href=root_url label=back_label %}
+    </div>
+  </div>
+{% endblock content %}

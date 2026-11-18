@@ -1,9 +1,14 @@
 """The host decides the schema and the URLconf: root domain vs workspace."""
 
+from typing import Any, cast
+
 import pytest
 from django.contrib.auth import get_user_model
+from django.db import connection
 from django_tenants.test.cases import TenantTestCase
 from django_tenants.test.client import TenantClient
+
+from apps.tenants.models import Membership
 
 ACME_DOMAIN = "acme.localhost"
 
@@ -28,6 +33,11 @@ class AcmeTenantTestCase(TenantTestCase):
         tenant.tax_id_type = "siret"
         tenant.tax_id = "73282932000074"
 
+    def setUp(self) -> None:
+        super().setUp()
+        # The root conftest resets to public after every test; re-enter the schema.
+        cast(Any, connection).set_tenant(self.tenant)  # untyped wrapper
+
 
 class TestWorkspaceHost(AcmeTenantTestCase):
     def setUp(self) -> None:
@@ -42,9 +52,9 @@ class TestWorkspaceHost(AcmeTenantTestCase):
 
     def test_workspace_home_greets_signed_in_user_with_workspace_name(self):
         # get_user_model, not the accounts factory: feature apps stay independent.
-        self.client.force_login(
-            get_user_model().objects.create_user(email="owner@acme.example")
-        )
+        user = get_user_model().objects.create_user(email="owner@acme.example")
+        Membership.objects.create(user=user, tenant=self.tenant, role="owner")
+        self.client.force_login(user)
 
         response = self.client.get("/")
 

@@ -1,9 +1,21 @@
 """Fixtures for every test, under apps/ and tests/ alike."""
 
 import importlib
+from typing import Any, cast
 
 import pytest
+from django.db import connection
 from django.utils import translation
+
+
+@pytest.fixture(autouse=True)
+def _reset_schema():
+    # Like the language: a test that enters a workspace schema must not leave the
+    # next test in it. TenantTestCase classes re-enter their schema in setUp.
+    # set_schema_to_public() only resets connection attributes; no query runs.
+    yield
+    # cast: django-tenants' connection wrapper ships no type hints.
+    cast(Any, connection).set_schema_to_public()
 
 
 @pytest.fixture(autouse=True)

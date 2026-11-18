@@ -28,7 +28,7 @@ def bus() -> EventBus:
 def test_publish_runs_handlers_after_commit(bus, django_capture_on_commit_callbacks):
     received: list[Event] = []
     bus.subscribe(ThingHappened, received.append)
-    event = ThingHappened(occurred_at=NOON, name="a")
+    event = ThingHappened(occurred_at=NOON, tenant_schema="ws_acme", name="a")
 
     with django_capture_on_commit_callbacks() as callbacks:
         bus.publish(event)
@@ -46,7 +46,7 @@ def test_publish_rolled_back_runs_no_handlers(bus):
     bus.subscribe(ThingHappened, received.append)
 
     with pytest.raises(RuntimeError), transaction.atomic():
-        bus.publish(ThingHappened(occurred_at=NOON, name="a"))
+        bus.publish(ThingHappened(occurred_at=NOON, tenant_schema="ws_acme", name="a"))
         raise RuntimeError
 
     assert received == []
@@ -59,7 +59,7 @@ def test_publish_only_reaches_handlers_of_that_event_type(
     bus.subscribe(OtherThingHappened, received.append)
 
     with django_capture_on_commit_callbacks(execute=True):
-        bus.publish(ThingHappened(occurred_at=NOON, name="a"))
+        bus.publish(ThingHappened(occurred_at=NOON, tenant_schema="ws_acme", name="a"))
 
     assert received == []
 
@@ -74,7 +74,7 @@ def test_failing_handler_does_not_stop_the_others(
 
     bus.subscribe(ThingHappened, broken)
     bus.subscribe(ThingHappened, received.append)
-    event = ThingHappened(occurred_at=NOON, name="a")
+    event = ThingHappened(occurred_at=NOON, tenant_schema="ws_acme", name="a")
 
     with django_capture_on_commit_callbacks(execute=True):
         bus.publish(event)
@@ -91,7 +91,7 @@ def test_subscribe_same_handler_twice_registers_once(
     bus.subscribe(ThingHappened, received.append)
 
     with django_capture_on_commit_callbacks(execute=True):
-        bus.publish(ThingHappened(occurred_at=NOON, name="a"))
+        bus.publish(ThingHappened(occurred_at=NOON, tenant_schema="ws_acme", name="a"))
 
     assert len(received) == 1
 
@@ -106,14 +106,16 @@ def test_subscriber_decorator_registers_and_returns_handler(
         received.append(event.name)
 
     with django_capture_on_commit_callbacks(execute=True):
-        bus.publish(ThingHappened(occurred_at=NOON, name="decorated"))
+        bus.publish(
+            ThingHappened(occurred_at=NOON, tenant_schema="ws_acme", name="decorated")
+        )
 
     assert received == ["decorated"]
     assert callable(on_thing)
 
 
 def test_events_are_immutable():
-    event = ThingHappened(occurred_at=NOON, name="a")
+    event = ThingHappened(occurred_at=NOON, tenant_schema="ws_acme", name="a")
 
     with pytest.raises(AttributeError):
         event.name = "b"  # type: ignore[misc]  # the point of the test

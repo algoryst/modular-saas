@@ -42,6 +42,8 @@ TEMPLATES[0]["OPTIONS"]["debug"] = True  # type: ignore[index]
 MEDIA_URL = "http://media.testserver/"
 # Your stuff...
 # ------------------------------------------------------------------------------
+# Workspace hosts in tests are <slug>.localhost.
+ALLOWED_HOSTS = ["testserver", ".localhost"]
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.locmem.LocMemCache",

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-18 15:59+0100\n"
+"POT-Creation-Date: 2026-11-18 16:17+0100\n"
 "Language: en-US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -706,6 +706,22 @@ msgstr ""
 msgid ""
 "Your workspace is ready. Contacts, quotes and invoices will appear here as "
 "they arrive."
+msgstr ""
+
+#: apps/tenants/templates/tenants/no_access.html:3
+#: apps/tenants/templates/tenants/no_access.html:6
+msgid "No access to this workspace"
+msgstr ""
+
+#: apps/tenants/templates/tenants/no_access.html:8
+#, python-format
+msgid ""
+"You are signed in as %(email)s, which is not a member of this workspace. Ask "
+"someone who uses it to invite you, or go back to your own workspaces."
+msgstr ""
+
+#: apps/tenants/templates/tenants/no_access.html:13
+msgid "Go to my workspaces"
 msgstr ""
 
 #: config/settings/base.py:37

@@ -189,6 +189,8 @@ MIDDLEWARE = [
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "apps.accounts.middleware.UserLanguageMiddleware",
+    # Users are shared: on a workspace host, signed-in non-members are refused.
+    "apps.tenants.middleware.WorkspaceMembershipMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "allauth.account.middleware.AccountMiddleware",

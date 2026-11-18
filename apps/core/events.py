@@ -20,6 +20,14 @@ from django.db import transaction
 @dataclass(frozen=True, kw_only=True)
 class Event:
     occurred_at: datetime
+    # The workspace concerned. Handlers pass it on to any Celery task they enqueue
+    # (TenantTask), which re-enters that schema itself.
+    tenant_schema: str
+
+
+@dataclass(frozen=True, kw_only=True)
+class WorkspaceCreated(Event):
+    owner_id: int
 
 
 type Handler[E: Event] = Callable[[E], None]
