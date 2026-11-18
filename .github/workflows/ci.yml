@@ -1,0 +1,119 @@
+name: CI
+
+on:
+  pull_request:
+    branches: ['main']
+    paths-ignore: ['docs/**']
+
+  push:
+    branches: ['main']
+    paths-ignore: ['docs/**']
+
+concurrency:
+  group: ${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+# Order follows docs/ARCHITECTURE.md section 9. Staging and the Playwright smoke
+# test are added once there is something to deploy.
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v6
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      - name: Pre-commit hygiene hooks
+        run: uv run --quiet pre-commit run --all-files --show-diff-on-failure
+
+      - name: Lint
+        run: make lint
+
+      - name: Types
+        run: make types
+
+      - name: Security
+        run: make security
+
+  tests:
+    needs: quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v6
+
+      # .envs/.local/* are not in the repo; create CI-only values for Docker Compose.
+      - name: Ensure local env files exist for Docker Compose
+        run: |
+          mkdir -p .envs/.local
+          if [ ! -f .envs/.local/.django ]; then
+            cat <<'EOF' > .envs/.local/.django
+          USE_DOCKER=yes
+          IPYTHONDIR=/app/.ipython
+          REDIS_URL=redis://redis:6379/0
+          CELERY_FLOWER_USER=debug
+          CELERY_FLOWER_PASSWORD=debug
+          EOF
+          fi
+          if [ ! -f .envs/.local/.postgres ]; then
+            cat <<'EOF' > .envs/.local/.postgres
+          POSTGRES_HOST=postgres
+          POSTGRES_PORT=5432
+          POSTGRES_DB=ci
+          POSTGRES_USER=debug
+          POSTGRES_PASSWORD=debug
+          EOF
+          fi
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and cache local backend
+        uses: docker/bake-action@v6
+        with:
+          push: false
+          load: true
+          files: docker-compose.local.yml
+          targets: django
+          set: |
+            django.cache-from=type=gha,scope=django-cached-tests
+            django.cache-to=type=gha,scope=django-cached-tests,mode=max
+            postgres.cache-from=type=gha,scope=postgres-cached-tests
+            postgres.cache-to=type=gha,scope=postgres-cached-tests,mode=max
+
+      - name: Django system check
+        run: make django-check
+
+      - name: Tests with coverage gates
+        run: make test
+
+      - name: Migrations check
+        run: make migrations-check
+
+      - name: Tear down the Stack
+        if: always()
+        run: make down
+
+  docker-build:
+    needs: tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v6
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build production image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: compose/production/django/Dockerfile
+          push: false
+          cache-from: type=gha,scope=django-production
+          cache-to: type=gha,scope=django-production,mode=max

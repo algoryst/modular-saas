@@ -1,0 +1,53 @@
+exclude: '^docs/|^\.claude/|/migrations/'
+default_stages: [pre-commit]
+minimum_pre_commit_version: "3.2.0"
+
+default_language_version:
+  python: python3.14
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-json
+      - id: check-toml
+      - id: check-xml
+      - id: check-yaml
+      - id: debug-statements
+      - id: check-builtin-literals
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: check-docstring-first
+      - id: detect-private-key
+
+  - repo: https://github.com/adamchainz/django-upgrade
+    rev: '1.33.0'
+    hooks:
+      - id: django-upgrade
+        args: ['--target-version', '6.0']
+
+  # black, isort and flake8 run from the uv lockfile so versions match `make lint`.
+  - repo: local
+    hooks:
+      - id: black
+        name: black
+        entry: uv run --quiet black
+        language: system
+        types: [python]
+      - id: isort
+        name: isort
+        entry: uv run --quiet isort
+        language: system
+        types: [python]
+      - id: flake8
+        name: flake8
+        entry: uv run --quiet flake8
+        language: system
+        types: [python]
+
+  - repo: https://github.com/tox-dev/pyproject-fmt
+    rev: v2.30.6
+    hooks:
+      - id: pyproject-fmt

@@ -1,0 +1,8 @@
+[flake8]
+max-line-length = 88
+# E203/E701/E704 conflict with black; E501 is replaced by B950 (black's 10% tolerance).
+extend-ignore = E203, E501, E701, E704
+extend-select = B950
+exclude = .git,.claude,__pycache__,.venv,*/migrations/*,staticfiles,node_modules
+per-file-ignores =
+    config/settings/*.py: F401, F403, F405
