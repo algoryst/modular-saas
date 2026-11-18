@@ -142,8 +142,9 @@ Run these through make. All of them must pass before you say a task is done.
 3. Migrations exist for every model change and `make migrations-check` is clean.
 4. User-facing strings are translated (fr) and `make messages` is clean.
 5. docs/PROGRESS.md box ticked and a session-log row added.
-6. For UI changes: run the app and exercise the page in a browser before saying it works.
-7. Reply with what changed, what is next, and any "Not now" items. No recap of steps.
+6. docs/DEVELOPER.md updated when setup, services, environment variables or debugging steps change.
+7. For UI changes: run the app and exercise the page in a browser before saying it works.
+8. Reply with what changed, what is next, and any "Not now" items. No recap of steps.
 
 ## Session start
 

@@ -40,7 +40,7 @@ Rule: work the first unchecked item. Tests with every item. Update the session l
 - [x] W1 core: base models, mixins, money.py (Decimal + currency), event bus
 - [x] W1 i18n: gettext setup, English source strings, French translation, locale/timezone settings
 - [x] W1 countrypacks: `CountryPack` protocol, contract test suite, `generic` and `fr` packs (skeleton)
-- [ ] W2 TaxIdentity model with per-country validators (SIRET first)
+- [x] W2 TaxIdentity model with per-country validators (SIRET first)
 - [ ] W2 tenants: django-tenants, signup with SIRET, isolation tests
 - [ ] W3 accounts: allauth, 2FA, axes, guardian, memberships and roles
 - [ ] W4 billing: dj-stripe, plans, Checkout, webhooks
@@ -153,6 +153,7 @@ Signups, trial-to-paid %, MRR, churn, support hours per week, test coverage, CI 
 | 2026-11-18 | W1 i18n: `User.language` (saved at signup, updated by the switcher, applied by `UserLanguageMiddleware` ahead of cookie/browser); TIME_ZONE Europe/Paris, LANGUAGE_CODE en; translation-completeness test (msgfmt); migration forward/backward tests; Site domain from `SITE_DOMAIN` (fix-forward migration, emails no longer say example.com); template coverage restored (`run.core = "ctrace"`). Audit: no untranslated user-facing strings | W1 countrypacks. Set `SITE_DOMAIN` in production env |
 | 2026-11-18 | UX (approved proposals): waitlist rate limit now shows the friendly 429 page (`RATELIMIT_VIEW` + `RatelimitMiddleware`) instead of 403; reset-from-link asks the new password once, and an expired link explains itself with a "send me a new link" button instead of "Bad Token" | W1 countrypacks |
 | 2026-11-18 | W1 countrypacks: `apps/countrypacks` (under `apps/` for lint/types/coverage; docs say `countrypacks/`). `CountryPack` protocol + value types, `COUNTRY_PACKS` registry with generic fallback, contract suite run against every registered pack, static protocol check, `generic` pack and `fr` skeleton (fr/Europe/Paris/EUR, mainland VAT 20/10/5.5/2.1, SIRET/SIREN/VAT types with validation deferred to W2, configurable VAT-franchise mention). Import contract: packs independent, core never imports them | W2 TaxIdentity model with per-country validators (SIRET first) |
+| 2026-11-18 | W2 TaxIdentity: abstract model (user decision: Tenant and Company inherit it; public schema stays Tenant + Domain); FR SIREN/SIRET (Luhn, La Poste rule)/VAT validators with forgiving input and specific errors; `CompanyRegistry` added to the CountryPack interface; `SireneRegistry` (API Sirene 3.11, 24 h cache, partial-disclosure and closed handling, never blocks signup) behind `SIRENE_API_KEY`; registry contract suite. Fixed test-order leak of the active language (root `conftest.py`). Added `docs/DEVELOPER.md` (dev, debugging, production env) and a CLAUDE.md rule to keep it current | W2 tenants: django-tenants, signup with SIRET lookup, isolation tests. User: INSEE key, confirm header name, RGPD register (INSEE) |
 
 ## Session Starter Prompt
 
