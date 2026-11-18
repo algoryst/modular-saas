@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-18 14:54+0100\n"
+"POT-Creation-Date: 2026-11-18 15:00+0100\n"
 "Language: fr-FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -89,6 +89,62 @@ msgstr "créé par"
 #: apps/core/models.py:77
 msgid "position"
 msgstr "position"
+
+#: apps/countrypacks/apps.py:7
+msgid "Country packs"
+msgstr "Packs pays"
+
+#: apps/countrypacks/fr/pack.py:21
+msgid "Standard rate (20%)"
+msgstr "Taux normal (20 %)"
+
+#: apps/countrypacks/fr/pack.py:22
+msgid "Intermediate rate (10%)"
+msgstr "Taux intermédiaire (10 %)"
+
+#: apps/countrypacks/fr/pack.py:23
+msgid "Reduced rate (5.5%)"
+msgstr "Taux réduit (5,5 %)"
+
+#: apps/countrypacks/fr/pack.py:24
+msgid "Super-reduced rate (2.1%)"
+msgstr "Taux particulier (2,1 %)"
+
+#: apps/countrypacks/fr/pack.py:28
+msgid "SIRET"
+msgstr "SIRET"
+
+#: apps/countrypacks/fr/pack.py:29
+msgid "SIREN"
+msgstr "SIREN"
+
+#: apps/countrypacks/fr/pack.py:30
+msgid "VAT number"
+msgstr "Numéro de TVA intracommunautaire"
+
+#: apps/countrypacks/fr/pack.py:36
+msgid "France"
+msgstr "France"
+
+#: apps/countrypacks/fr/pack.py:51 apps/countrypacks/generic/pack.py:34
+msgid "Unknown identifier type."
+msgstr "Type d'identifiant inconnu."
+
+#: apps/countrypacks/fr/pack.py:53
+msgid "Checking this identifier is not available yet."
+msgstr "La vérification de cet identifiant n'est pas encore disponible."
+
+#: apps/countrypacks/generic/pack.py:21
+msgid "Other country"
+msgstr "Autre pays"
+
+#: apps/countrypacks/generic/pack.py:30
+msgid "Tax identification number"
+msgstr "Numéro d'identification fiscale"
+
+#: apps/countrypacks/generic/pack.py:37
+msgid "Enter your tax identification number."
+msgstr "Saisissez votre numéro d'identification fiscale."
 
 #: apps/marketing/apps.py:7
 msgid "Marketing"
@@ -358,7 +414,9 @@ msgstr "Un instant, s'il vous plaît"
 #: apps/templates/429.html:8
 msgid ""
 "You tried that several times in a short time. Wait a little, then try again."
-msgstr "Vous avez essayé plusieurs fois en peu de temps. Patientez un peu, puis réessayez."
+msgstr ""
+"Vous avez essayé plusieurs fois en peu de temps. Patientez un peu, puis "
+"réessayez."
 
 #: apps/templates/429.html:11
 msgid "Try again"
@@ -480,7 +538,9 @@ msgstr "Ce lien ne fonctionne plus"
 msgid ""
 "Reset links work only once and expire after a while. Ask for a new one, it "
 "takes a few seconds."
-msgstr "Les liens de réinitialisation ne servent qu'une fois et expirent au bout d'un moment. Demandez-en un nouveau, cela ne prend que quelques secondes."
+msgstr ""
+"Les liens de réinitialisation ne servent qu'une fois et expirent au bout "
+"d'un moment. Demandez-en un nouveau, cela ne prend que quelques secondes."
 
 #: apps/templates/account/password_reset_from_key.html:11
 msgid "Send me a new link"

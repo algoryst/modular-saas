@@ -20,7 +20,17 @@ source_modules =
     apps.core
 forbidden_modules =
     apps.accounts
+    apps.countrypacks
     apps.marketing
+
+# Country packs never import each other; shared types live in countrypacks.base.
+# Add every new pack here.
+[importlinter:contract:country-packs-independent]
+name = Country packs are independent
+type = independence
+modules =
+    apps.countrypacks.fr
+    apps.countrypacks.generic
 
 # view -> form -> service -> repository -> model, inside each app.
 # Parentheses mark layers an app may not have yet. Add every new app to containers.

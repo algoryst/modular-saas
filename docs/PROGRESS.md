@@ -39,7 +39,7 @@ Rule: work the first unchecked item. Tests with every item. Update the session l
 
 - [x] W1 core: base models, mixins, money.py (Decimal + currency), event bus
 - [x] W1 i18n: gettext setup, English source strings, French translation, locale/timezone settings
-- [ ] W1 countrypacks: `CountryPack` protocol, contract test suite, `generic` and `fr` packs (skeleton)
+- [x] W1 countrypacks: `CountryPack` protocol, contract test suite, `generic` and `fr` packs (skeleton)
 - [ ] W2 TaxIdentity model with per-country validators (SIRET first)
 - [ ] W2 tenants: django-tenants, signup with SIRET, isolation tests
 - [ ] W3 accounts: allauth, 2FA, axes, guardian, memberships and roles

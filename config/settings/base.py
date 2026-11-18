@@ -106,6 +106,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "apps.core",
+    "apps.countrypacks",
     "apps.accounts",
     "apps.marketing",
     # Your stuff: custom apps go here
@@ -402,6 +403,15 @@ SPECTACULAR_SETTINGS: dict[str, Any] = {
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+# Country packs (apps.countrypacks)
+# ------------------------------------------------------------------------------
+# ISO 3166 alpha-2 code -> pack class. Adding a country adds a line here, never
+# edits callers. "generic" is the fallback for countries without a pack.
+COUNTRY_PACKS = {
+    "generic": "apps.countrypacks.generic.pack.GenericPack",
+    "fr": "apps.countrypacks.fr.pack.FrancePack",
+}
 
 # Waitlist (apps.marketing)
 # ------------------------------------------------------------------------------

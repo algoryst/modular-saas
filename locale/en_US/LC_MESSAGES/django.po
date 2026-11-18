@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-18 14:54+0100\n"
+"POT-Creation-Date: 2026-11-18 15:00+0100\n"
 "Language: en-US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -85,6 +85,62 @@ msgstr ""
 
 #: apps/core/models.py:77
 msgid "position"
+msgstr ""
+
+#: apps/countrypacks/apps.py:7
+msgid "Country packs"
+msgstr ""
+
+#: apps/countrypacks/fr/pack.py:21
+msgid "Standard rate (20%)"
+msgstr ""
+
+#: apps/countrypacks/fr/pack.py:22
+msgid "Intermediate rate (10%)"
+msgstr ""
+
+#: apps/countrypacks/fr/pack.py:23
+msgid "Reduced rate (5.5%)"
+msgstr ""
+
+#: apps/countrypacks/fr/pack.py:24
+msgid "Super-reduced rate (2.1%)"
+msgstr ""
+
+#: apps/countrypacks/fr/pack.py:28
+msgid "SIRET"
+msgstr ""
+
+#: apps/countrypacks/fr/pack.py:29
+msgid "SIREN"
+msgstr ""
+
+#: apps/countrypacks/fr/pack.py:30
+msgid "VAT number"
+msgstr ""
+
+#: apps/countrypacks/fr/pack.py:36
+msgid "France"
+msgstr ""
+
+#: apps/countrypacks/fr/pack.py:51 apps/countrypacks/generic/pack.py:34
+msgid "Unknown identifier type."
+msgstr ""
+
+#: apps/countrypacks/fr/pack.py:53
+msgid "Checking this identifier is not available yet."
+msgstr ""
+
+#: apps/countrypacks/generic/pack.py:21
+msgid "Other country"
+msgstr ""
+
+#: apps/countrypacks/generic/pack.py:30
+msgid "Tax identification number"
+msgstr ""
+
+#: apps/countrypacks/generic/pack.py:37
+msgid "Enter your tax identification number."
 msgstr ""
 
 #: apps/marketing/apps.py:7

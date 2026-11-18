@@ -112,7 +112,12 @@ ignore_errors = true
 # CLAUDE.md: mypy strict for services and repositories. `strict = true` is
 # global-only (in an override it leaks to every module), so list its flags.
 # core (money, events, clock, base models) is the kernel everything else relies on.
-module = [ "apps.*.repositories", "apps.*.services", "apps.core.*" ]
+module = [
+  "apps.*.repositories",
+  "apps.*.services",
+  "apps.core.*",
+  "apps.countrypacks.*",
+]
 disallow_any_generics = true
 disallow_subclassing_any = true
 disallow_untyped_calls = true
@@ -125,7 +130,7 @@ no_implicit_reexport = true
 
 [[tool.mypy.overrides]]
 # Tests follow the global settings, not the strict kernel rules above.
-module = "apps.core.tests.*"
+module = [ "apps.core.tests.*", "apps.countrypacks.tests.*" ]
 disallow_untyped_defs = false
 disallow_incomplete_defs = false
 disallow_untyped_calls = false
