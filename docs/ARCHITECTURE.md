@@ -22,7 +22,7 @@ Companion files: PRODUCTS.md (what we sell), PROGRESS.md (checklist), LEGAL.md (
 | Language / framework | Python, Django, DRF |
 | Project template | django-cookiecutter |
 | DB | PostgreSQL |
-| Multi-tenancy | django-tenants (schema per tenant; public schema holds only Tenant and Domain) |
+| Multi-tenancy | django-tenants (schema per tenant, one subdomain per workspace; public schema holds Tenant, Domain, User, Membership and auth/session tables; business data only in tenant schemas) |
 | Auth | django-allauth, django-two-factor-auth, django-axes, django-guardian |
 | Payments | dj-stripe; Stripe Checkout / Payment Links, Stripe Connect Standard for tenant collection (we never hold funds) |
 | Async | Celery + Redis |
@@ -111,7 +111,7 @@ app/
 
 ## 5. Core Abstractions
 
-Abstract models: TimeStamped, UUID, TenantScoped, SoftDelete, CreatedBy, Ordered.
+Abstract models: TimeStamped, UUID, SoftDelete, CreatedBy, Ordered, TaxIdentity. No TenantScoped: the tenant schema is the isolation boundary.
 Mixins: Audit, Search, Notification, Export.
 
 Key models: Tenant, Domain, User, Membership, Contact, Company, Deal, Pipeline, Stage, Activity, Quote, QuoteLine, SignatureRequest, SignatureAuditLog, Invoice, InvoiceLine, CreditNote, Project, Task, TimeEntry, Product, Order, Subscription, ProcessingRecord, DataSubjectRequest.
@@ -136,6 +136,10 @@ Key models: Tenant, Domain, User, Membership, Contact, Company, Deal, Pipeline, 
 ### Tenant signup
 
 B2B only. SIRET required. Email verification mandatory. Terms (CGV/CGU + DPA annex) acceptance stored with timestamp and version.
+
+- Users are shared across workspaces (one login, several workspaces); `Membership` holds the role per workspace.
+- One workspace per SIRET by default (`TENANT_UNIQUE_TAX_ID`); a taken SIRET points the person to an invitation instead of a dead end.
+- Two steps: company number (validated, looked up in the official register, closed establishments refused), then name, email and password. The workspace and its schema are created only after the email is verified; a signed, single-use, one-minute link then signs the user into the workspace subdomain.
 
 ### RGPD module
 
