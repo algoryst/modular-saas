@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 from apps.countrypacks.base import (
     AccountingExport,
+    CompanyRegistry,
     LocaleDefaults,
     NumberingRules,
     PlatformAdapter,
@@ -42,6 +43,9 @@ class GenericPack:
 
     def numbering_rules(self) -> NumberingRules:
         return NumberingRules(pattern="{year}-{sequence:05d}", resets_yearly=True)
+
+    def company_registry(self) -> CompanyRegistry | None:
+        return None
 
     def einvoicing_adapter(self) -> PlatformAdapter | None:
         return None

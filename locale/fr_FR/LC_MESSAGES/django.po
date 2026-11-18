@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-18 15:00+0100\n"
+"POT-Creation-Date: 2026-11-18 15:36+0100\n"
 "Language: fr-FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -94,57 +94,93 @@ msgstr "position"
 msgid "Country packs"
 msgstr "Packs pays"
 
-#: apps/countrypacks/fr/pack.py:21
+#: apps/countrypacks/fr/identifiers.py:35
+#, python-format
+msgid "Enter your %(name)s number."
+msgstr "Saisissez votre numéro %(name)s."
+
+#: apps/countrypacks/fr/identifiers.py:39
+#, python-format
+msgid "A %(name)s contains only digits."
+msgstr "Un numéro %(name)s ne contient que des chiffres."
+
+#: apps/countrypacks/fr/identifiers.py:43
+#, python-format
+msgid "A %(name)s has %(length)d digits; you entered %(count)d."
+msgstr "Un numéro %(name)s comporte %(length)d chiffres ; vous en avez saisi %(count)d."
+
+#: apps/countrypacks/fr/identifiers.py:51
+#, python-format
+msgid "This %(name)s number is not valid. Check for a typo."
+msgstr "Ce numéro %(name)s n'est pas valide. Vérifiez qu'il n'y a pas de faute de frappe."
+
+#: apps/countrypacks/fr/identifiers.py:85
+msgid "A French VAT number looks like FR 12 345678901 (FR, 2 digits, SIREN)."
+msgstr "Un numéro de TVA français a la forme FR 12 345678901 (FR, 2 chiffres, SIREN)."
+
+#: apps/countrypacks/fr/identifiers.py:89
+msgid "VAT"
+msgstr "de TVA"
+
+#: apps/countrypacks/fr/pack.py:30
 msgid "Standard rate (20%)"
 msgstr "Taux normal (20 %)"
 
-#: apps/countrypacks/fr/pack.py:22
+#: apps/countrypacks/fr/pack.py:31
 msgid "Intermediate rate (10%)"
 msgstr "Taux intermédiaire (10 %)"
 
-#: apps/countrypacks/fr/pack.py:23
+#: apps/countrypacks/fr/pack.py:32
 msgid "Reduced rate (5.5%)"
 msgstr "Taux réduit (5,5 %)"
 
-#: apps/countrypacks/fr/pack.py:24
+#: apps/countrypacks/fr/pack.py:33
 msgid "Super-reduced rate (2.1%)"
 msgstr "Taux particulier (2,1 %)"
 
-#: apps/countrypacks/fr/pack.py:28
+#: apps/countrypacks/fr/pack.py:39
 msgid "SIRET"
 msgstr "SIRET"
 
-#: apps/countrypacks/fr/pack.py:29
+#: apps/countrypacks/fr/pack.py:40
 msgid "SIREN"
 msgstr "SIREN"
 
-#: apps/countrypacks/fr/pack.py:30
+#: apps/countrypacks/fr/pack.py:41
 msgid "VAT number"
 msgstr "Numéro de TVA intracommunautaire"
 
-#: apps/countrypacks/fr/pack.py:36
+#: apps/countrypacks/fr/pack.py:47
 msgid "France"
 msgstr "France"
 
-#: apps/countrypacks/fr/pack.py:51 apps/countrypacks/generic/pack.py:34
+#: apps/countrypacks/fr/pack.py:61 apps/countrypacks/generic/pack.py:35
 msgid "Unknown identifier type."
 msgstr "Type d'identifiant inconnu."
 
-#: apps/countrypacks/fr/pack.py:53
-msgid "Checking this identifier is not available yet."
-msgstr "La vérification de cet identifiant n'est pas encore disponible."
-
-#: apps/countrypacks/generic/pack.py:21
+#: apps/countrypacks/generic/pack.py:22
 msgid "Other country"
 msgstr "Autre pays"
 
-#: apps/countrypacks/generic/pack.py:30
+#: apps/countrypacks/generic/pack.py:31
 msgid "Tax identification number"
 msgstr "Numéro d'identification fiscale"
 
-#: apps/countrypacks/generic/pack.py:37
+#: apps/countrypacks/generic/pack.py:38
 msgid "Enter your tax identification number."
 msgstr "Saisissez votre numéro d'identification fiscale."
+
+#: apps/countrypacks/models.py:13
+msgid "country"
+msgstr "pays"
+
+#: apps/countrypacks/models.py:14
+msgid "identifier type"
+msgstr "type d'identifiant"
+
+#: apps/countrypacks/models.py:16
+msgid "identifier"
+msgstr "identifiant"
 
 #: apps/marketing/apps.py:7
 msgid "Marketing"
@@ -653,6 +689,9 @@ msgstr "Anglais"
 #: config/settings/base.py:38
 msgid "French"
 msgstr "Français"
+
+#~ msgid "Checking this identifier is not available yet."
+#~ msgstr "La vérification de cet identifiant n'est pas encore disponible."
 
 #~ msgid "Sign Up"
 #~ msgstr "S'inscrire"

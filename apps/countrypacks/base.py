@@ -70,6 +70,33 @@ class SellerProfile(Protocol):
     def vat_franchise_mention(self) -> str: ...
 
 
+@dataclass(frozen=True, slots=True)
+class CompanyRecord:
+    """A business as an official register describes it, for the user to confirm."""
+
+    identifier: str
+    legal_name: str  # "" when the register does not disclose it
+    address_lines: tuple[str, ...]
+    postcode: str
+    city: str
+    active: bool  # False: the register lists it as closed
+    public: bool  # False: the business opted out of public listing
+
+
+class RegistryUnavailable(Exception):
+    """The register could not answer (timeout, rate limit, outage, bad key)."""
+
+
+class CompanyRegistry(Protocol):
+    def lookup(self, type_code: str, value: str) -> CompanyRecord | None:
+        """None when not found or the type is not supported.
+
+        Raises RegistryUnavailable when the register cannot answer; callers fall
+        back to manual entry, never block on it.
+        """
+        ...
+
+
 class PlatformAdapter(Protocol):
     """E-invoicing platform (PA) connection. Methods arrive in Phase 3b."""
 
@@ -101,6 +128,10 @@ class CountryPack(Protocol):
     def invoice_mentions(self, seller: SellerProfile) -> tuple[str, ...]: ...
 
     def numbering_rules(self) -> NumberingRules: ...
+
+    def company_registry(self) -> CompanyRegistry | None:
+        """Official business register lookup, or None if unavailable for the country."""
+        ...
 
     def einvoicing_adapter(self) -> PlatformAdapter | None: ...
 

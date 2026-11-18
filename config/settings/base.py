@@ -413,6 +413,11 @@ COUNTRY_PACKS = {
     "fr": "apps.countrypacks.fr.pack.FrancePack",
 }
 
+# INSEE API Sirene: SIRET lookup at signup. Empty key = lookup off, manual entry.
+# Key: portail-api.insee.fr, application with "Simple" security, subscribe to Sirene.
+SIRENE_API_KEY = env("SIRENE_API_KEY", default="")
+SIRENE_API_URL = env("SIRENE_API_URL", default="https://api.insee.fr/api-sirene/3.11")
+
 # Waitlist (apps.marketing)
 # ------------------------------------------------------------------------------
 # Closed by default: the form must not collect emails before the legal notice and

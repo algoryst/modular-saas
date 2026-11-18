@@ -96,6 +96,14 @@ def test_invoice_mentions_are_non_empty_strings(pack, mention):
     assert all(isinstance(m, str) and m.strip() for m in mentions)
 
 
+def test_company_registry_is_none_or_can_look_up(pack, settings):
+    settings.SIRENE_API_KEY = "contract-test-key"
+
+    registry = pack.company_registry()
+
+    assert registry is None or callable(registry.lookup)
+
+
 def test_optional_adapters_are_none_until_implemented(pack):
     # Phase 3b replaces this with the PlatformAdapter / export contract suites.
     assert pack.einvoicing_adapter() is None

@@ -1,12 +1,15 @@
-"""France. Skeleton: identifier validation lands in W2, invoicing detail in Phase 3b."""
+"""France. Invoicing detail (mentions, series, Factur-X, FEC, PA) lands in Phase 3b."""
 
 from collections.abc import Mapping
 from decimal import Decimal
 
+from django.conf import settings
+from django.core.cache import caches
 from django.utils.translation import gettext_lazy as _
 
 from apps.countrypacks.base import (
     AccountingExport,
+    CompanyRegistry,
     LocaleDefaults,
     NumberingRules,
     PlatformAdapter,
@@ -15,6 +18,12 @@ from apps.countrypacks.base import (
     TaxIdentityType,
     TaxRate,
 )
+from apps.countrypacks.fr.identifiers import (
+    validate_siren,
+    validate_siret,
+    validate_vat,
+)
+from apps.countrypacks.fr.sirene import SireneRegistry
 
 # Mainland France VAT rates (CGI art. 278 to 281 nonies). Overseas rates differ.
 VAT_RATES = (
@@ -23,6 +32,8 @@ VAT_RATES = (
     TaxRate("reduced", Decimal("0.055"), _("Reduced rate (5.5%)")),
     TaxRate("super_reduced", Decimal("0.021"), _("Super-reduced rate (2.1%)")),
 )
+
+VALIDATORS = {"siret": validate_siret, "siren": validate_siren, "vat": validate_vat}
 
 TAX_IDENTITY_TYPES = (
     TaxIdentityType("siret", _("SIRET")),
@@ -45,12 +56,19 @@ class FrancePack:
         return TAX_IDENTITY_TYPES
 
     def validate_tax_identity(self, type_code: str, value: str) -> TaxIdentityResult:
-        # W2 (TaxIdentity model) adds the SIRET/SIREN/VAT checks; until then nothing
-        # is accepted, so no unchecked identifier can slip in.
-        if type_code not in {t.code for t in TAX_IDENTITY_TYPES}:
+        validator = VALIDATORS.get(type_code)
+        if validator is None:
             return TaxIdentityResult.invalid(_("Unknown identifier type."))
-        return TaxIdentityResult.invalid(
-            _("Checking this identifier is not available yet.")
+        return validator(value)
+
+    def company_registry(self) -> CompanyRegistry | None:
+        # No key (local dev, tests): no lookup, signup falls back to manual entry.
+        if not settings.SIRENE_API_KEY:
+            return None
+        return SireneRegistry(
+            api_key=settings.SIRENE_API_KEY,
+            api_url=settings.SIRENE_API_URL,
+            cache=caches["default"],
         )
 
     def invoice_mentions(self, seller: SellerProfile) -> tuple[str, ...]:

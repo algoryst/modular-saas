@@ -62,10 +62,8 @@ class TestFrancePack:
 
         assert codes == ["siret", "siren", "vat"]
 
-    def test_france_tax_identity_validation_not_available_before_w2(self):
-        result = FrancePack().validate_tax_identity("siret", "73282932000074")
-
-        assert not result.valid
+    def test_france_unknown_identifier_type_is_invalid(self):
+        assert not FrancePack().validate_tax_identity("ssn", "123").valid
 
     def test_france_vat_franchise_mention_is_the_configured_text(self):
         mention = "TVA non applicable, art. 293 B du CGI"
