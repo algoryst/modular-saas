@@ -17,13 +17,20 @@ uv sync                       # host tools: black, isort, flake8, mypy, import-l
 # .envs/.local/.django and .envs/.local/.postgres: copy from a teammate (git-ignored)
 make build                    # Docker images
 make up                       # Postgres, Redis, Mailpit, Django, Celery, Tailwind watcher
-docker compose -f docker-compose.local.yml run --rm django python manage.py migrate
+make migrate                  # migrate_schemas: public schema, then every workspace
 docker compose -f docker-compose.local.yml run --rm django python manage.py createsuperuser
 ```
 
+Multi-tenancy (django-tenants): the root domain (`localhost:8000`) serves the marketing
+site, signup and admin; each workspace has its own subdomain and Postgres schema
+(`acme.localhost:8000` → schema `ws_acme`). Users and memberships are shared; business
+data lives only in workspace schemas.
+
 | URL | What |
 |---|---|
-| http://localhost:8000 | App (sign-up is open locally, closed by default elsewhere) |
+| http://localhost:8000 | Root domain: marketing site, signup (open locally, closed by default elsewhere), login |
+| http://localhost:8000/signup/ | Create a workspace: SIRET, then account, then email code (Mailpit), then you land in `<name>.localhost:8000` |
+| `http://<slug>.localhost:8000` | A workspace. Chrome and Firefox resolve `*.localhost`; for Safari add the host to `/etc/hosts` |
 | http://localhost:8000/admin/ | Django admin (local URL; production uses `DJANGO_ADMIN_URL`) |
 | http://localhost:8025 | Mailpit: every email the app sends (verification codes, resets) |
 | http://localhost:5555 | Flower: Celery tasks (`CELERY_FLOWER_USER` / `_PASSWORD` from `.envs/.local/.django`) |
@@ -35,6 +42,7 @@ Stop with `make down`.
 | Command | Does |
 |---|---|
 | `make check` | The gate: lint, types, Django check, migration check, tests + coverage. Must pass before a commit |
+| `make migrate` | `migrate_schemas` (never plain `migrate`): public schema, then every workspace |
 | `make test-one T=path::test_name` | One test, no coverage |
 | `make fmt` | black + isort |
 | `make messages` | Extract and compile translations (fr, en). Then fill `locale/fr_FR/LC_MESSAGES/django.po` |
@@ -48,11 +56,15 @@ on the host through `uv`.
 
 | Symptom | Cause / fix |
 |---|---|
+| `ModuleNotFoundError` for a package that is in `pyproject.toml` | Containers still run the old image. `make build && make up` (`docker compose restart` reuses the old container) |
 | Mailpit at :8025 is empty although emails were "sent" | Another Mailpit (Homebrew) holds port 8025. `brew services stop mailpit`, then `docker compose -f docker-compose.local.yml restart mailpit` |
 | `NoReverseMatch` right after pulling or adding a URL | The dev server did not reload `urls.py`: `docker compose -f docker-compose.local.yml restart django` |
 | New Tailwind classes have no effect | Check `docker compose ... logs tailwind`; templates must sit under `apps/**/templates` |
 | A test passes alone but fails in the full run | Leaked state between tests. The root `conftest.py` resets the active language; add similar resets there |
 | Tests fail with "A schema named 'ws_…' already exists" | An aborted run left a workspace schema in the reused test DB. Rebuild it once: `docker compose -f docker-compose.local.yml run --rm django pytest --create-db` |
+| "No access to this workspace" (403) | Signed in as a user who is not a member. Sign out, or add a `Membership` in the admin |
+| "This sign-in link has expired" | Handoff links into a workspace work once, for 60 s. Sign in again on the root domain |
+| A workspace subdomain shows the marketing site | No `Domain` row for that host (the root domain is the fallback). Check the admin's Domains |
 | `NoReverseMatch` for `admin:` (or another root-only page) in a test | Outside a request, `reverse()` uses the workspace URLconf. Add `pytestmark = pytest.mark.usefixtures("public_urls")` |
 | "Un instant, s'il vous plaît" (429) while testing | Rate limits (waitlist 5/h per IP, allauth code resends). Restart Django or clear the cache: `... run --rm django python manage.py shell -c "from django.core.cache import cache; cache.clear()"` |
 | Need a verification or sign-in code | Mailpit, or `curl -s localhost:8025/api/v1/messages` |
@@ -92,10 +104,10 @@ Set these too (defaults are wrong for production):
 
 | Variable | Default | Set to |
 |---|---|---|
-| `DJANGO_ALLOWED_HOSTS` | `example.com` | Comma-separated public domains |
+| `DJANGO_ALLOWED_HOSTS` | `example.com` | Root domain and all workspaces, e.g. `app.example.fr,.app.example.fr` |
 | `POSTGRES_HOST`, `POSTGRES_PORT` | `postgres`, `5432` | Managed database host |
 | `REDIS_URL` | `redis://redis:6379/0` | Cache, Celery broker, rate limits |
-| `SITE_DOMAIN` | `localhost:8000` | Public domain; shown in emails |
+| `SITE_DOMAIN` | `localhost:8000` | Root domain, e.g. `app.example.fr`. **Set before the first `migrate_schemas`**: it seeds the public tenant's domain. Workspaces get `<slug>.<SITE_DOMAIN>`. Also shown in emails |
 | `DJANGO_DEFAULT_FROM_EMAIL`, `DJANGO_EMAIL_SUBJECT_PREFIX` | cookiecutter values | Real sender and prefix |
 | `DJANGO_AWS_S3_REGION_NAME`, `DJANGO_AWS_S3_CUSTOM_DOMAIN` | none | Bucket region / CDN domain |
 | `SIRENE_API_KEY` | empty (lookup off) | INSEE key: portail-api.insee.fr → application with "Simple" security → subscribe to API Sirene. Confirm the header name in the portal docs matches `SireneRegistry.KEY_HEADER` |
@@ -108,6 +120,8 @@ Feature switches:
 | `WAITLIST_ENABLED` | `False` | Waitlist form. Only after the legal notice and privacy pages are filled in |
 | `BREVO_WAITLIST_LIST_SAAS`, `BREVO_WAITLIST_LIST_BOILERPLATE`, `BREVO_DOI_TEMPLATE_ID`, `WAITLIST_CONFIRMED_URL` | 0 / empty | Brevo lists, double opt-in template, post-confirmation URL |
 | `WAITLIST_RATE_LIMIT` | `5/h` | Per IP |
+| `TENANT_UNIQUE_TAX_ID` | `True` | One workspace per SIRET (others are told to ask for an invitation) |
+| `SIGNUP_LOOKUP_RATE_LIMIT` | `10/m` | Signup company step, per IP (protects the shared Sirene quota) |
 
 Optional: `SENTRY_ENVIRONMENT`, `DJANGO_SENTRY_LOG_LEVEL`, `CONN_MAX_AGE`,
 `DJANGO_SECURE_SSL_REDIRECT`, `DJANGO_SECURE_HSTS_PRELOAD`, `DJANGO_ADMIN_FORCE_ALLAUTH`.
@@ -119,16 +133,19 @@ start. **Migrations are not automatic**:
 
 ```bash
 docker compose -f docker-compose.production.yml build
-docker compose -f docker-compose.production.yml run --rm django python manage.py migrate
+docker compose -f docker-compose.production.yml run --rm django python manage.py migrate_schemas
 docker compose -f docker-compose.production.yml up -d
 docker compose -f docker-compose.production.yml run --rm django python manage.py check --deploy
 ```
 
-Once django-tenants lands (W2 tenants), `migrate` becomes `migrate_schemas`.
+Workspaces live on subdomains: point a **wildcard DNS record** (`*.app.example.fr`) and
+the root (`app.example.fr`) at the server, and use a **wildcard TLS certificate**
+(Let's Encrypt DNS-01 challenge; Traefik supports it).
 
 ### Before going live
 
 - [ ] `check --deploy` is clean
+- [ ] Wildcard DNS and wildcard certificate in place; `DJANGO_ALLOWED_HOSTS` includes `.app.example.fr`
 - [ ] Legal notice and privacy pages filled in (`apps/marketing/templates/marketing/`)
 - [ ] RGPD register lists sub-processors and recipients: Scaleway, Brevo, Sentry, INSEE (SIRET lookups)
 - [ ] Production deployment target is not decided yet (Scaleway, EU). `docker-compose.production.yml` is the cookiecutter Traefik setup until then

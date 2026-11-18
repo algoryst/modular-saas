@@ -1,4 +1,4 @@
-.PHONY: check fmt lint types security django-check migrations-check test test-one up down build messages css
+.PHONY: check fmt lint types security django-check migrate migrations-check test test-one up down build messages css
 
 COMPOSE := docker compose -f docker-compose.local.yml
 RUN := $(COMPOSE) run --rm django
@@ -27,6 +27,10 @@ security:
 
 django-check:
 	$(RUN) python manage.py check
+
+# Public schema, then every workspace schema. Never plain `migrate` (CLAUDE.md).
+migrate:
+	$(RUN) python manage.py migrate_schemas
 
 migrations-check:
 	$(RUN) python manage.py makemigrations --check --dry-run

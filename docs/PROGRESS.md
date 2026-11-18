@@ -41,7 +41,7 @@ Rule: work the first unchecked item. Tests with every item. Update the session l
 - [x] W1 i18n: gettext setup, English source strings, French translation, locale/timezone settings
 - [x] W1 countrypacks: `CountryPack` protocol, contract test suite, `generic` and `fr` packs (skeleton)
 - [x] W2 TaxIdentity model with per-country validators (SIRET first)
-- [ ] W2 tenants: django-tenants, signup with SIRET, isolation tests
+- [x] W2 tenants: django-tenants, signup with SIRET, isolation tests
 - [ ] W3 accounts: allauth, 2FA, axes, guardian, memberships and roles
 - [ ] W4 billing: dj-stripe, plans, Checkout, webhooks
 - [ ] W5 notifications: Brevo, templates, Celery
@@ -154,6 +154,7 @@ Signups, trial-to-paid %, MRR, churn, support hours per week, test coverage, CI 
 | 2026-11-18 | UX (approved proposals): waitlist rate limit now shows the friendly 429 page (`RATELIMIT_VIEW` + `RatelimitMiddleware`) instead of 403; reset-from-link asks the new password once, and an expired link explains itself with a "send me a new link" button instead of "Bad Token" | W1 countrypacks |
 | 2026-11-18 | W1 countrypacks: `apps/countrypacks` (under `apps/` for lint/types/coverage; docs say `countrypacks/`). `CountryPack` protocol + value types, `COUNTRY_PACKS` registry with generic fallback, contract suite run against every registered pack, static protocol check, `generic` pack and `fr` skeleton (fr/Europe/Paris/EUR, mainland VAT 20/10/5.5/2.1, SIRET/SIREN/VAT types with validation deferred to W2, configurable VAT-franchise mention). Import contract: packs independent, core never imports them | W2 TaxIdentity model with per-country validators (SIRET first) |
 | 2026-11-18 | W2 TaxIdentity: abstract model (user decision: Tenant and Company inherit it; public schema stays Tenant + Domain); FR SIREN/SIRET (Luhn, La Poste rule)/VAT validators with forgiving input and specific errors; `CompanyRegistry` added to the CountryPack interface; `SireneRegistry` (API Sirene 3.11, 24 h cache, partial-disclosure and closed handling, never blocks signup) behind `SIRENE_API_KEY`; registry contract suite. Fixed test-order leak of the active language (root `conftest.py`). Added `docs/DEVELOPER.md` (dev, debugging, production env) and a CLAUDE.md rule to keep it current | W2 tenants: django-tenants, signup with SIRET lookup, isolation tests. User: INSEE key, confirm header name, RGPD register (INSEE) |
+| 2026-11-18 | W2 tenants (user decisions: shared users + Membership in public, CLAUDE.md amended; subdomains; one workspace per SIRET with "ask for an invitation", `TENANT_UNIQUE_TAX_ID`). django-tenants 4.0.6 (all 4.0.x patches are cross-tenant security fixes); Tenant/Domain/Membership; root vs workspace URLconfs, admin root-only; `CreateTenant` in one transaction with advisory lock; membership middleware; `TenantTask`; `Event.tenant_schema` + `WorkspaceCreated`; two-step SIRET signup (no JS), workspace created after email verification, one-minute single-use handoff to the subdomain; picker / add workspace; `TENANT_LIMIT_SET_CALLS`; isolation tests (access, data, cache); test isolation fixes (schema reset, seed rows after transactional tests); `make migrate`, docs | W3 accounts: allauth, 2FA, axes, guardian, memberships and roles (invitations, "request access"). User: amend ARCHITECTURE §2 (public schema contents) |
 
 ## Session Starter Prompt
 
