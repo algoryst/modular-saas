@@ -1,0 +1,17 @@
+{# The company being signed up, as found in step 1. Expects `company` (session dict). #}
+{% load i18n %}
+<div class="mb-4 rounded-lg border border-zinc-200 bg-zinc-50 p-4 text-sm" data-testid="company-card">
+  {% if company.lookup == "found" %}
+    <p class="text-xs font-medium uppercase text-zinc-500">{% translate "Found in the official register" %}</p>
+    <p class="mt-1 font-medium text-zinc-900">{{ company.name }}</p>
+    {% for line in company.address %}<p class="text-zinc-600">{{ line }}</p>{% endfor %}
+  {% elif company.lookup == "not_public" %}
+    <p class="text-zinc-600">{% translate "Your company is registered but not publicly listed, so please type its name below." %}</p>
+  {% elif company.lookup == "unavailable" %}
+    <p class="text-zinc-600">{% translate "We could not reach the official register just now. Please type your company name below." %}</p>
+  {% endif %}
+  <p class="mt-2 text-zinc-500">
+    {{ company.tax_id }} ·
+    <a class="font-medium text-blue-600 hover:underline" href="{% url 'tenants:signup' %}">{% translate "Change" %}</a>
+  </p>
+</div>

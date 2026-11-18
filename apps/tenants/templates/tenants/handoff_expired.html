@@ -1,0 +1,11 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n allauth %}
+{% block head_title %}{% translate "This link has expired" %}{% endblock head_title %}
+{% block content %}
+  {% element h1 %}{% translate "This sign-in link has expired" %}{% endelement %}
+  {% element p %}
+    {% translate "Links that take you into a workspace work once and only for a minute. Sign in again and we will take you there." %}
+  {% endelement %}
+  {% translate "Sign in" as login_label %}
+  {% include "components/link_button.html" with href=login_url label=login_label %}
+{% endblock content %}

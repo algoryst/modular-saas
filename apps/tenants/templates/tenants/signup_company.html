@@ -1,0 +1,28 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n allauth %}
+{% block head_title %}{% translate "Create your workspace" %}{% endblock head_title %}
+{% block content %}
+  <p class="text-xs font-medium uppercase text-zinc-500">{% translate "Step 1 of 2" %}</p>
+  {% element h1 %}{% translate "Your company" %}{% endelement %}
+  {% element p %}
+    {% translate "We use your company number to fill in its details for you." %}
+  {% endelement %}
+  {% url 'tenants:signup' as action_url %}
+  {% element form form=form method="post" action=action_url %}
+    {% slot body %}
+      {% csrf_token %}
+      {% element fields form=form %}{% endelement %}
+    {% endslot %}
+    {% slot actions %}
+      {% element button type="submit" %}{% translate "Continue" %}{% endelement %}
+    {% endslot %}
+  {% endelement %}
+  {% if not request.user.is_authenticated %}
+    {% url 'account_login' as login_url %}
+    <p class="mt-6 text-sm text-zinc-600">
+      {% blocktranslate trimmed %}
+        Already have an account? <a class="font-medium text-blue-600 hover:underline" href="{{ login_url }}">Sign in</a>
+      {% endblocktranslate %}
+    </p>
+  {% endif %}
+{% endblock content %}

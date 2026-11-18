@@ -1,0 +1,20 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n allauth %}
+{% block head_title %}{% translate "Your workspaces" %}{% endblock head_title %}
+{% block content %}
+  {% element h1 %}{% translate "Choose a workspace" %}{% endelement %}
+  <ul class="divide-y divide-zinc-200 rounded-lg border border-zinc-200">
+    {% for membership in memberships %}
+      <li>
+        <a class="flex items-center justify-between px-4 py-3 hover:bg-zinc-50"
+           href="{% url 'tenants:open' membership.tenant.pk %}">
+          <span class="font-medium text-zinc-900">{{ membership.tenant.name }}</span>
+          <span class="text-xs text-zinc-500">{{ membership.get_role_display }}</span>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+  <p class="mt-6 text-sm">
+    <a class="font-medium text-blue-600 hover:underline" href="{% url 'tenants:signup' %}">{% translate "Create another workspace" %}</a>
+  </p>
+{% endblock content %}

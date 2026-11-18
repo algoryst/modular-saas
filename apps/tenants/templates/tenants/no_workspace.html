@@ -1,0 +1,17 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n allauth %}
+{% block head_title %}{% translate "No workspace yet" %}{% endblock head_title %}
+{% block content %}
+  {% element h1 %}{% translate "You are not in a workspace yet" %}{% endelement %}
+  {% if taken %}
+    <p class="mb-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+      {% translate "This company already has a workspace. Ask a colleague who uses it to invite you." %}
+    </p>
+  {% endif %}
+  {% element p %}
+    {% translate "Ask a colleague to invite you to their workspace, or create one for your company." %}
+  {% endelement %}
+  {% url 'tenants:signup' as create_url %}
+  {% translate "Create a workspace" as create_label %}
+  {% include "components/link_button.html" with href=create_url label=create_label %}
+{% endblock content %}

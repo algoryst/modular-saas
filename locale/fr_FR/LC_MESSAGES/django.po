@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-18 16:17+0100\n"
+"POT-Creation-Date: 2026-11-18 16:28+0100\n"
 "Language: fr-FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,25 +30,9 @@ msgstr "Dates importantes"
 msgid "Accounts"
 msgstr "Comptes"
 
-#: apps/accounts/forms.py:43 apps/accounts/tests/test_forms.py:41
+#: apps/accounts/forms.py:40 apps/accounts/tests/test_forms.py:41
 msgid "This email has already been taken."
 msgstr "Cette adresse e-mail est déjà utilisée."
-
-#: apps/accounts/forms.py:58
-msgid "Email address"
-msgstr "Adresse e-mail"
-
-#: apps/accounts/forms.py:72
-msgid "Avoid common or all-number passwords."
-msgstr "Évitez les mots de passe courants ou composés uniquement de chiffres."
-
-#: apps/accounts/forms.py:74
-#, python-format
-msgid ""
-"At least %(min_length)d characters. Avoid common or all-number passwords."
-msgstr ""
-"Au moins %(min_length)d caractères. Évitez les mots de passe courants ou "
-"composés uniquement de chiffres."
 
 #: apps/accounts/models.py:20
 msgid "Name of User"
@@ -69,6 +53,22 @@ msgstr "Informations mises à jour avec succès"
 #: apps/core/apps.py:7
 msgid "Core"
 msgstr "Noyau"
+
+#: apps/core/forms.py:24
+msgid "Email address"
+msgstr "Adresse e-mail"
+
+#: apps/core/forms.py:38
+msgid "Avoid common or all-number passwords."
+msgstr "Évitez les mots de passe courants ou composés uniquement de chiffres."
+
+#: apps/core/forms.py:40
+#, python-format
+msgid ""
+"At least %(min_length)d characters. Avoid common or all-number passwords."
+msgstr ""
+"Au moins %(min_length)d caractères. Évitez les mots de passe courants ou "
+"composés uniquement de chiffres."
 
 #: apps/core/models.py:22
 msgid "created at"
@@ -520,6 +520,7 @@ msgstr "Saisissez votre code de connexion"
 #: apps/templates/account/login.html:3 apps/templates/account/login.html:5
 #: apps/templates/account/login.html:21
 #: apps/templates/allauth/layouts/entrance.html:3 apps/templates/base.html:37
+#: apps/tenants/templates/tenants/handoff_expired.html:9
 msgid "Sign in"
 msgstr "Se connecter"
 
@@ -608,14 +609,27 @@ msgid "Sign in with a password instead"
 msgstr "Se connecter avec un mot de passe"
 
 #: apps/templates/account/signup.html:3
-msgid "Create an account"
-msgstr "Créer un compte"
+#: apps/tenants/templates/tenants/create_workspace.html:3
+#: apps/tenants/templates/tenants/create_workspace.html:5
+#: apps/tenants/templates/tenants/signup_company.html:3
+msgid "Create your workspace"
+msgstr "Créez votre espace de travail"
 
 #: apps/templates/account/signup.html:5
-msgid "Create your account"
-msgstr "Créez votre compte"
+msgid "Step 2 of 2"
+msgstr "Étape 2 sur 2"
 
-#: apps/templates/account/signup.html:7
+#: apps/templates/account/signup.html:6
+msgid "Your account"
+msgstr "Votre compte"
+
+#: apps/templates/account/signup.html:16
+#: apps/tenants/templates/tenants/create_workspace.html:14
+msgid "Create my workspace"
+msgstr "Créer mon espace de travail"
+
+#: apps/templates/account/signup.html:20
+#: apps/tenants/templates/tenants/signup_company.html:23
 #, python-format
 msgid ""
 "Already have an account? <a class=\"font-medium text-blue-600 hover:"
@@ -623,10 +637,6 @@ msgid ""
 msgstr ""
 "Vous avez déjà un compte ? <a class=\"font-medium text-blue-600 hover:"
 "underline\" href=\"%(login_url)s\">Se connecter</a>"
-
-#: apps/templates/account/signup.html:19 apps/templates/base.html:41
-msgid "Create account"
-msgstr "Créer un compte"
 
 #: apps/templates/account/signup_closed.html:3
 #: apps/templates/account/signup_closed.html:5
@@ -679,6 +689,10 @@ msgstr "Mon profil"
 msgid "Sign out"
 msgstr "Se déconnecter"
 
+#: apps/templates/base.html:41
+msgid "Create account"
+msgstr "Créer un compte"
+
 #: apps/templates/components/form_field.html:21
 msgid "Show password"
 msgstr "Afficher le mot de passe"
@@ -690,6 +704,22 @@ msgstr "Langue"
 #: apps/tenants/apps.py:7
 msgid "Workspaces"
 msgstr "Espaces de travail"
+
+#: apps/tenants/forms.py:25
+msgid "Country"
+msgstr "Pays"
+
+#: apps/tenants/forms.py:28
+msgid "Company number"
+msgstr "Numéro d'entreprise"
+
+#: apps/tenants/forms.py:30
+msgid "In France, your 14-digit SIRET."
+msgstr "En France, votre SIRET à 14 chiffres."
+
+#: apps/tenants/forms.py:36
+msgid "Company name"
+msgstr "Nom de l'entreprise"
 
 #: apps/tenants/models.py:16
 msgid "name"
@@ -748,6 +778,53 @@ msgstr "adhésion"
 msgid "memberships"
 msgstr "adhésions"
 
+#: apps/tenants/services.py:38
+#: apps/tenants/templates/tenants/no_workspace.html:8
+msgid ""
+"This company already has a workspace. Ask a colleague who uses it to invite "
+"you."
+msgstr "Cette entreprise a déjà un espace de travail. Demandez à un collègue qui l'utilise de vous inviter."
+
+#: apps/tenants/services.py:216
+msgid ""
+"The official register lists this establishment as closed. Check the number, "
+"or use your current establishment's."
+msgstr "Le registre officiel indique que cet établissement est fermé. Vérifiez le numéro, ou utilisez celui de votre établissement actuel."
+
+#: apps/tenants/templates/tenants/_company_card.html:5
+msgid "Found in the official register"
+msgstr "Trouvée dans le registre officiel"
+
+#: apps/tenants/templates/tenants/_company_card.html:9
+msgid ""
+"Your company is registered but not publicly listed, so please type its name "
+"below."
+msgstr "Votre entreprise est enregistrée mais n'est pas diffusée publiquement : saisissez son nom ci-dessous."
+
+#: apps/tenants/templates/tenants/_company_card.html:11
+msgid ""
+"We could not reach the official register just now. Please type your company "
+"name below."
+msgstr "Le registre officiel est injoignable pour le moment. Saisissez le nom de votre entreprise ci-dessous."
+
+#: apps/tenants/templates/tenants/_company_card.html:15
+msgid "Change"
+msgstr "Modifier"
+
+#: apps/tenants/templates/tenants/handoff_expired.html:3
+msgid "This link has expired"
+msgstr "Ce lien a expiré"
+
+#: apps/tenants/templates/tenants/handoff_expired.html:5
+msgid "This sign-in link has expired"
+msgstr "Ce lien de connexion a expiré"
+
+#: apps/tenants/templates/tenants/handoff_expired.html:7
+msgid ""
+"Links that take you into a workspace work once and only for a minute. Sign "
+"in again and we will take you there."
+msgstr "Les liens qui vous mènent dans un espace de travail ne servent qu'une fois et pendant une minute. Reconnectez-vous et nous vous y emmènerons."
+
 #: apps/tenants/templates/tenants/home.html:6
 #, python-format
 msgid "Welcome to %(name)s"
@@ -771,11 +848,60 @@ msgstr "Pas d'accès à cet espace de travail"
 msgid ""
 "You are signed in as %(email)s, which is not a member of this workspace. Ask "
 "someone who uses it to invite you, or go back to your own workspaces."
-msgstr "Vous êtes connecté avec %(email)s, qui n'est pas membre de cet espace de travail. Demandez à quelqu'un qui l'utilise de vous inviter, ou revenez à vos propres espaces."
+msgstr ""
+"Vous êtes connecté avec %(email)s, qui n'est pas membre de cet espace de "
+"travail. Demandez à quelqu'un qui l'utilise de vous inviter, ou revenez à "
+"vos propres espaces."
 
 #: apps/tenants/templates/tenants/no_access.html:13
 msgid "Go to my workspaces"
 msgstr "Aller à mes espaces de travail"
+
+#: apps/tenants/templates/tenants/no_workspace.html:3
+msgid "No workspace yet"
+msgstr "Pas encore d'espace de travail"
+
+#: apps/tenants/templates/tenants/no_workspace.html:5
+msgid "You are not in a workspace yet"
+msgstr "Vous n'êtes encore dans aucun espace de travail"
+
+#: apps/tenants/templates/tenants/no_workspace.html:12
+msgid ""
+"Ask a colleague to invite you to their workspace, or create one for your "
+"company."
+msgstr "Demandez à un collègue de vous inviter dans son espace de travail, ou créez-en un pour votre entreprise."
+
+#: apps/tenants/templates/tenants/no_workspace.html:15
+msgid "Create a workspace"
+msgstr "Créer un espace de travail"
+
+#: apps/tenants/templates/tenants/picker.html:3
+msgid "Your workspaces"
+msgstr "Vos espaces de travail"
+
+#: apps/tenants/templates/tenants/picker.html:5
+msgid "Choose a workspace"
+msgstr "Choisissez un espace de travail"
+
+#: apps/tenants/templates/tenants/picker.html:18
+msgid "Create another workspace"
+msgstr "Créer un autre espace de travail"
+
+#: apps/tenants/templates/tenants/signup_company.html:5
+msgid "Step 1 of 2"
+msgstr "Étape 1 sur 2"
+
+#: apps/tenants/templates/tenants/signup_company.html:6
+msgid "Your company"
+msgstr "Votre entreprise"
+
+#: apps/tenants/templates/tenants/signup_company.html:8
+msgid "We use your company number to fill in its details for you."
+msgstr "Nous utilisons le numéro de votre entreprise pour remplir ses informations à votre place."
+
+#: apps/tenants/templates/tenants/signup_company.html:17
+msgid "Continue"
+msgstr "Continuer"
 
 #: config/settings/base.py:37
 msgid "English"
@@ -784,6 +910,9 @@ msgstr "Anglais"
 #: config/settings/base.py:38
 msgid "French"
 msgstr "Français"
+
+#~ msgid "Create an account"
+#~ msgstr "Créer un compte"
 
 #~ msgid "Checking this identifier is not available yet."
 #~ msgstr "La vérification de cet identifiant n'est pas encore disponible."

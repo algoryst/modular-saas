@@ -44,15 +44,24 @@ def _signed_in(client: Client) -> bool:
     return "_auth_user_id" in client.session
 
 
+def _start_signup(client: Client) -> None:
+    """Step 1 (company). No Sirene key in tests, so the name is typed in step 2."""
+    client.post(
+        reverse("tenants:signup"), {"country": "fr", "tax_id": "73282932000074"}
+    )
+
+
 def _sign_up(client: Client, email: str = "founder@example.fr"):
+    _start_signup(client)
     return client.post(
-        reverse("account_signup"), {"email": email, "password1": PASSWORD}
+        reverse("account_signup"),
+        {"company_name": "Acme", "email": email, "password1": PASSWORD},
     )
 
 
 class TestSignupClosed:
     def test_signup_closed_by_default_points_to_waitlist(self, client):
-        response = client.get(reverse("account_signup"))
+        response = client.get(reverse("account_signup"), follow=True)
 
         content = response.content.decode()
         assert 'name="password1"' not in content
@@ -67,6 +76,7 @@ class TestSignupClosed:
 @pytest.mark.usefixtures("signup_open")
 class TestSignupByCode:
     def test_signup_form_asks_password_once_with_short_help(self, client):
+        _start_signup(client)
         response = client.get(reverse("account_signup"))
 
         form = response.context["form"]

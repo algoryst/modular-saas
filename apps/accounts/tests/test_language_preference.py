@@ -90,10 +90,17 @@ class TestAccountLanguageWins:
 class TestSignupRemembersLanguage:
     def test_signup_stores_the_language_being_viewed(self, client, settings):
         settings.ACCOUNT_ALLOW_REGISTRATION = True
+        client.post(
+            reverse("tenants:signup"), {"country": "fr", "tax_id": "73282932000074"}
+        )
 
         client.post(
             reverse("account_signup"),
-            {"email": "nouveau@example.fr", "password1": "correct-horse-battery-42"},
+            {
+                "company_name": "Acme",
+                "email": "nouveau@example.fr",
+                "password1": "correct-horse-battery-42",
+            },
             HTTP_ACCEPT_LANGUAGE="fr",
         )
 

@@ -34,3 +34,24 @@ class TenantRepository:
 
     def is_member(self, user_id: int, tenant_id: int) -> bool:
         return Membership.objects.filter(user_id=user_id, tenant_id=tenant_id).exists()
+
+    def memberships_for(self, user_id: int) -> list[Membership]:
+        return list(
+            Membership.objects.filter(user_id=user_id)
+            .select_related("tenant")
+            .prefetch_related("tenant__domains")
+            .order_by("tenant__name")
+        )
+
+    def membership(self, user_id: int, tenant_id: int) -> Membership | None:
+        return (
+            Membership.objects.filter(user_id=user_id, tenant_id=tenant_id)
+            .select_related("user", "tenant")
+            .first()
+        )
+
+    def primary_domain(self, tenant: Tenant) -> str:
+        domain = Domain.objects.filter(tenant=tenant, is_primary=True).first()
+        if domain is None:
+            raise Domain.DoesNotExist(tenant.schema_name)
+        return str(domain.domain)  # DomainMixin is untyped

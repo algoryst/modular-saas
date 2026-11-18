@@ -13,6 +13,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
 
 from apps.accounts.views import set_language_view
+from apps.tenants.views import WorkspaceSignupView
 
 urlpatterns = [
     path(
@@ -22,7 +23,10 @@ urlpatterns = [
     ),
     # User management
     path("users/", include("apps.accounts.urls", namespace="accounts")),
+    # Signup step 2 replaces allauth's view (same URL name), before allauth's URLs.
+    path("accounts/signup/", WorkspaceSignupView.as_view(), name="account_signup"),
     path("accounts/", include("allauth.urls")),
+    path("", include("apps.tenants.urls", namespace="tenants")),
     # Your stuff: custom urls includes go here
     path("", include("apps.marketing.urls", namespace="marketing")),
     # Stores the language choice in a cookie, and on the account when signed in.

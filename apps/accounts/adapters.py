@@ -5,7 +5,9 @@ import typing
 from allauth.account.adapter import DefaultAccountAdapter
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from django.conf import settings
+from django.urls import reverse
 from django.utils import translation
+from django_tenants.utils import get_public_schema_name
 
 if typing.TYPE_CHECKING:
     from allauth.socialaccount.models import SocialLogin
@@ -18,6 +20,18 @@ if typing.TYPE_CHECKING:
 class AccountAdapter(DefaultAccountAdapter):
     def is_open_for_signup(self, request: HttpRequest) -> bool:
         return getattr(settings, "ACCOUNT_ALLOW_REGISTRATION", True)
+
+    def get_login_redirect_url(self, request: HttpRequest) -> str:
+        # On a workspace host, stay there; on the root domain, go to (or create)
+        # the user's workspace, which hands the session over to its host.
+        tenant = getattr(request, "tenant", None)
+        if tenant is not None and tenant.schema_name != get_public_schema_name():
+            return reverse("home")
+        return reverse("tenants:go")
+
+    def get_signup_redirect_url(self, request: HttpRequest) -> str:
+        # allauth reads ACCOUNT_SIGNUP_REDIRECT_URL here, not the login logic above.
+        return self.get_login_redirect_url(request)
 
     def save_user(
         self, request: HttpRequest, user: User, form: Form, commit: bool = True

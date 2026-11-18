@@ -1,0 +1,17 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n allauth %}
+{% block head_title %}{% translate "Create your workspace" %}{% endblock head_title %}
+{% block content %}
+  {% element h1 %}{% translate "Create your workspace" %}{% endelement %}
+  {% include "tenants/_company_card.html" %}
+  {% url 'tenants:create' as action_url %}
+  {% element form form=form method="post" action=action_url %}
+    {% slot body %}
+      {% csrf_token %}
+      {% element fields form=form %}{% endelement %}
+    {% endslot %}
+    {% slot actions %}
+      {% element button type="submit" %}{% translate "Create my workspace" %}{% endelement %}
+    {% endslot %}
+  {% endelement %}
+{% endblock content %}

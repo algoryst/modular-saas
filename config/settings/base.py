@@ -130,6 +130,9 @@ TENANT_MODEL = "tenants.Tenant"
 TENANT_DOMAIN_MODEL = "tenants.Domain"
 # Unknown hosts (and the test client's "testserver") get the public site.
 SHOW_PUBLIC_IF_NO_TENANT_FOUND = True
+# Set search_path once per tenant switch, not before every query (halves round trips;
+# set_tenant() clears the cache, so switching stays correct).
+TENANT_LIMIT_SET_CALLS = True
 # Schema names derive from what people type: never adopt an existing schema.
 TENANT_REJECT_EXISTING_SCHEMA = True
 # One workspace per tax identity (SIRET); boilerplate buyers may turn this off.
@@ -150,7 +153,9 @@ AUTHENTICATION_BACKENDS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 AUTH_USER_MODEL = "accounts.User"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = "accounts:redirect"
+# Root domain: open (or create) the user's workspace. AccountAdapter keeps people
+# on a workspace host when they sign in there.
+LOGIN_REDIRECT_URL = "tenants:go"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
 LOGIN_URL = "account_login"
 
@@ -386,7 +391,8 @@ ACCOUNT_ADAPTER = "apps.accounts.adapters.AccountAdapter"
 # https://docs.allauth.org/en/latest/account/forms.html
 ACCOUNT_FORMS = {
     "login": "apps.accounts.forms.UserLoginForm",
-    "signup": "apps.accounts.forms.UserSignupForm",
+    # Signup creates a workspace too: company name, then email and password.
+    "signup": "apps.tenants.forms.WorkspaceSignupForm",
     "reset_password": "apps.accounts.forms.UserResetPasswordForm",
     "request_login_code": "apps.accounts.forms.UserRequestLoginCodeForm",
     "confirm_login_code": "apps.accounts.forms.UserConfirmLoginCodeForm",
@@ -442,6 +448,9 @@ COUNTRY_PACKS = {
 # Key: portail-api.insee.fr, application with "Simple" security, subscribe to Sirene.
 SIRENE_API_KEY = env("SIRENE_API_KEY", default="")
 SIRENE_API_URL = env("SIRENE_API_URL", default="https://api.insee.fr/api-sirene/3.11")
+
+# Signup step 1 looks companies up in the register (shared 30/min Sirene quota).
+SIGNUP_LOOKUP_RATE_LIMIT = env("SIGNUP_LOOKUP_RATE_LIMIT", default="10/m")
 
 # Waitlist (apps.marketing)
 # ------------------------------------------------------------------------------
