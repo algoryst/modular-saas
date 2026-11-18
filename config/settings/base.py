@@ -389,18 +389,22 @@ ACCOUNT_SESSION_REMEMBER = True
 # https://docs.allauth.org/en/latest/account/configuration.html
 ACCOUNT_ADAPTER = "apps.accounts.adapters.AccountAdapter"
 # https://docs.allauth.org/en/latest/account/forms.html
+# Constants, not literals, for the reset forms: bandit B105 flags a string value under
+# a key containing "password", although these are class paths.
+_RESET_FORM = "apps.accounts.forms.UserResetPasswordForm"
+_RESET_FROM_KEY_FORM = "apps.accounts.forms.UserResetPasswordKeyForm"
 ACCOUNT_FORMS = {
     "login": "apps.accounts.forms.UserLoginForm",
     # Signup creates a workspace too: company name, then email and password.
     "signup": "apps.tenants.forms.WorkspaceSignupForm",
-    "reset_password": "apps.accounts.forms.UserResetPasswordForm",
+    "reset_password": _RESET_FORM,
     "request_login_code": "apps.accounts.forms.UserRequestLoginCodeForm",
     "confirm_login_code": "apps.accounts.forms.UserConfirmLoginCodeForm",
     "confirm_email_verification_code": (
         "apps.accounts.forms.UserConfirmEmailVerificationCodeForm"
     ),
     "change_email": "apps.accounts.forms.UserChangeEmailForm",
-    "reset_password_from_key": "apps.accounts.forms.UserResetPasswordKeyForm",
+    "reset_password_from_key": _RESET_FROM_KEY_FORM,
 }
 # https://docs.allauth.org/en/latest/socialaccount/configuration.html
 SOCIALACCOUNT_ADAPTER = "apps.accounts.adapters.SocialAccountAdapter"
