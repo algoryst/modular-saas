@@ -62,7 +62,8 @@ else:
         },
     }
 
-DATABASES["default"]["ATOMIC_REQUESTS"] = True
+# Services own their transactions (transaction.atomic + on_commit side effects).
+DATABASES["default"]["ATOMIC_REQUESTS"] = False
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
 
 # URLS
