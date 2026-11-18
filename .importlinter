@@ -9,6 +9,7 @@ name = Feature apps are independent
 type = independence
 modules =
     apps.accounts
+    apps.marketing
 
 # view -> form -> service -> repository -> model, inside each app.
 # Parentheses mark layers an app may not have yet. Add every new app to containers.
@@ -23,3 +24,4 @@ layers =
     (models)
 containers =
     apps.accounts
+    apps.marketing

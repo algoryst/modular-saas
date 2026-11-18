@@ -6,7 +6,317 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-18 11:05+0000\n"
 "Language: en-US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: apps/accounts/admin.py:23
+msgid "Personal info"
+msgstr ""
+
+#: apps/accounts/admin.py:25
+msgid "Permissions"
+msgstr ""
+
+#: apps/accounts/admin.py:36
+msgid "Important dates"
+msgstr ""
+
+#: apps/accounts/apps.py:7
+msgid "Accounts"
+msgstr ""
+
+#: apps/accounts/forms.py:27 apps/accounts/tests/test_forms.py:41
+msgid "This email has already been taken."
+msgstr ""
+
+#: apps/accounts/models.py:19
+msgid "Name of User"
+msgstr ""
+
+#: apps/accounts/models.py:22
+msgid "email address"
+msgstr ""
+
+#: apps/accounts/tests/test_views.py:75 apps/accounts/views.py:29
+msgid "Information successfully updated"
+msgstr ""
+
+#: apps/marketing/apps.py:7
+msgid "Marketing"
+msgstr ""
+
+#: apps/marketing/forms.py:8
+msgid "Work email"
+msgstr ""
+
+#: apps/marketing/forms.py:10
+msgid "I am interested in"
+msgstr ""
+
+#: apps/marketing/forms.py:14
+msgid "I agree to receive launch news by email. I can unsubscribe at any time."
+msgstr ""
+
+#: apps/marketing/forms.py:19
+msgid "Leave this field empty"
+msgstr ""
+
+#: apps/marketing/services.py:10
+msgid "The platform for French SMEs"
+msgstr ""
+
+#: apps/marketing/services.py:11
+msgid "The Django boilerplate"
+msgstr ""
+
+#: apps/marketing/templates/marketing/landing.html:3
+msgid "Modular SaaS: CRM, quotes and invoicing for French SMEs"
+msgstr ""
+
+#: apps/marketing/templates/marketing/landing.html:6
+msgid "Run your small business from one simple workspace"
+msgstr ""
+
+#: apps/marketing/templates/marketing/landing.html:8
+msgid ""
+"Contacts, deals and quotes with simple electronic signature. Built for "
+"French SMEs, launching soon."
+msgstr ""
+
+#: apps/marketing/templates/marketing/landing.html:13
+msgid "For French SMEs"
+msgstr ""
+
+#: apps/marketing/templates/marketing/landing.html:15
+msgid "CRM: contacts, companies and deals in one place"
+msgstr ""
+
+#: apps/marketing/templates/marketing/landing.html:16
+msgid "Quotes signed online with a simple electronic signature"
+msgstr ""
+
+#: apps/marketing/templates/marketing/landing.html:17
+msgid "Planned: invoicing for the 2027 e-invoicing reform"
+msgstr ""
+
+#: apps/marketing/templates/marketing/landing.html:21
+msgid "For Django developers"
+msgstr ""
+
+#: apps/marketing/templates/marketing/landing.html:23
+msgid "A multi-tenant Django boilerplate with billing, auth and 2FA"
+msgstr ""
+
+#: apps/marketing/templates/marketing/landing.html:24
+msgid "Strict layers, events between apps, tests from day one"
+msgstr ""
+
+#: apps/marketing/templates/marketing/landing.html:25
+msgid "One-time licence, sold through a merchant of record"
+msgstr ""
+
+#: apps/marketing/templates/marketing/landing.html:34
+msgid "Check your inbox"
+msgstr ""
+
+#: apps/marketing/templates/marketing/landing.html:36
+msgid "We sent you a confirmation link. Click it to join the waitlist."
+msgstr ""
+
+#: apps/marketing/templates/marketing/landing.html:40
+#: apps/marketing/templates/marketing/landing.html:56
+msgid "Join the waitlist"
+msgstr ""
+
+#: apps/marketing/templates/marketing/landing.html:48
+#, python-format
+msgid ""
+"We only use your email to tell you about the launch. Read our <a "
+"class=\"underline\" href=\"%(privacy_url)s\">privacy notice</a>."
+msgstr ""
+
+#: apps/marketing/templates/marketing/landing.html:59
+msgid "Waitlist opening soon"
+msgstr ""
+
+#: apps/marketing/templates/marketing/landing.html:61
+msgid "Sign-ups open in a few days. Come back soon to reserve your place."
+msgstr ""
+
+#: apps/marketing/templates/marketing/legal_notice.html:3
+#: apps/marketing/templates/marketing/legal_notice.html:7
+#: apps/templates/base.html:51
+msgid "Legal notice"
+msgstr ""
+
+#: apps/marketing/templates/marketing/legal_notice.html:9
+msgid "Publisher"
+msgstr ""
+
+#: apps/marketing/templates/marketing/legal_notice.html:11
+msgid "[Full name], individual entrepreneur (micro-entrepreneur)"
+msgstr ""
+
+#: apps/marketing/templates/marketing/legal_notice.html:13
+msgid "Address: [business or domiciliation address]"
+msgstr ""
+
+#: apps/marketing/templates/marketing/legal_notice.html:15
+msgid "Phone: [phone number]"
+msgstr ""
+
+#: apps/marketing/templates/marketing/legal_notice.html:17
+msgid "Email: [contact email]"
+msgstr ""
+
+#: apps/marketing/templates/marketing/legal_notice.html:19
+msgid "SIRET: [SIRET number]"
+msgstr ""
+
+#: apps/marketing/templates/marketing/legal_notice.html:23
+msgid "Director of publication"
+msgstr ""
+
+#: apps/marketing/templates/marketing/legal_notice.html:24
+msgid "[Full name]"
+msgstr ""
+
+#: apps/marketing/templates/marketing/legal_notice.html:27
+msgid "Hosting"
+msgstr ""
+
+#: apps/marketing/templates/marketing/legal_notice.html:28
+msgid "[Host name, address and phone number]"
+msgstr ""
+
+#: apps/marketing/templates/marketing/privacy.html:3
+#: apps/marketing/templates/marketing/privacy.html:7
+#: apps/templates/base.html:52
+msgid "Privacy notice"
+msgstr ""
+
+#: apps/marketing/templates/marketing/privacy.html:9
+msgid "Controller"
+msgstr ""
+
+#: apps/marketing/templates/marketing/privacy.html:10
+msgid "[Full name], [address], [contact email]"
+msgstr ""
+
+#: apps/marketing/templates/marketing/privacy.html:13
+msgid "Waitlist"
+msgstr ""
+
+#: apps/marketing/templates/marketing/privacy.html:15
+msgid ""
+"We collect your email address and the product you are interested in, only to "
+"tell you about the launch. Legal basis: your consent. You confirm it by "
+"clicking the link in our confirmation email, and you can withdraw it at any "
+"time with the unsubscribe link."
+msgstr ""
+
+#: apps/marketing/templates/marketing/privacy.html:17
+msgid "Retention: [retention period]"
+msgstr ""
+
+#: apps/marketing/templates/marketing/privacy.html:20
+msgid "Sub-processors"
+msgstr ""
+
+#: apps/marketing/templates/marketing/privacy.html:21
+msgid "[List: Brevo (email), hosting provider, ...]"
+msgstr ""
+
+#: apps/marketing/templates/marketing/privacy.html:24
+msgid "Audience measurement"
+msgstr ""
+
+#: apps/marketing/templates/marketing/privacy.html:25
+msgid "[Analytics tool and its CNIL-exempt configuration]"
+msgstr ""
+
+#: apps/marketing/templates/marketing/privacy.html:28
+msgid "Your rights"
+msgstr ""
+
+#: apps/marketing/templates/marketing/privacy.html:30
+msgid ""
+"You can access, correct or delete your data by writing to [contact email]. "
+"You can also lodge a complaint with the CNIL."
+msgstr ""
+
+#: apps/templates/403.html:3 apps/templates/403.html:5
+#: apps/templates/403_csrf.html:3 apps/templates/403_csrf.html:5
+msgid "Access denied"
+msgstr ""
+
+#: apps/templates/403.html:7 apps/templates/403_csrf.html:7
+msgid "You don't have permission to view this page."
+msgstr ""
+
+#: apps/templates/403.html:9 apps/templates/403_csrf.html:9
+#: apps/templates/404.html:9
+msgid "Back to home"
+msgstr ""
+
+#: apps/templates/404.html:3 apps/templates/404.html:5
+msgid "Page not found"
+msgstr ""
+
+#: apps/templates/404.html:7
+msgid "This page doesn't exist or has moved."
+msgstr ""
+
+#: apps/templates/500.html:3 apps/templates/500.html:5
+msgid "Something went wrong"
+msgstr ""
+
+#: apps/templates/500.html:6
+msgid "We have been notified. Please try again in a few minutes."
+msgstr ""
+
+#: apps/templates/accounts/user_detail.html:10
+#: apps/templates/accounts/user_form.html:3
+#: apps/templates/accounts/user_form.html:6
+msgid "Edit my details"
+msgstr ""
+
+#: apps/templates/accounts/user_detail.html:13
+msgid "Email addresses"
+msgstr ""
+
+#: apps/templates/accounts/user_detail.html:16
+msgid "Two-factor authentication"
+msgstr ""
+
+#: apps/templates/accounts/user_form.html:12
+msgid "Save"
+msgstr ""
+
+#: apps/templates/allauth/layouts/entrance.html:3 apps/templates/base.html:33
+msgid "Sign In"
+msgstr ""
+
+#: apps/templates/base.html:20
+msgid "Main"
+msgstr ""
+
+#: apps/templates/base.html:22
+msgid "About"
+msgstr ""
+
+#: apps/templates/base.html:26
+msgid "My Profile"
+msgstr ""
+
+#: apps/templates/base.html:28
+msgid "Sign Out"
+msgstr ""
+
+#: apps/templates/base.html:37
+msgid "Sign Up"
+msgstr ""

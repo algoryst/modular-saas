@@ -72,3 +72,6 @@ INSTALLED_APPS += ["django_extensions"]
 CELERY_TASK_EAGER_PROPAGATES = True
 # Your stuff...
 # ------------------------------------------------------------------------------
+# LocMemCache is per-process, so django-ratelimit flags it as not shared. That is
+# fine for a single dev/test process; production uses Redis.
+SILENCED_SYSTEM_CHECKS = ["django_ratelimit.E003", "django_ratelimit.W001"]

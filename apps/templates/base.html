@@ -47,6 +47,10 @@
           {% endblock content %}
         {% endblock main %}
       </main>
+      <footer class="mx-auto flex max-w-5xl gap-4 px-4 pb-8 text-xs text-zinc-500">
+        <a class="hover:text-zinc-900" href="{% url 'marketing:legal_notice' %}">{% translate "Legal notice" %}</a>
+        <a class="hover:text-zinc-900" href="{% url 'marketing:privacy' %}">{% translate "Privacy notice" %}</a>
+      </footer>
     {% endblock body %}
     {% block modal %}
     {% endblock modal %}

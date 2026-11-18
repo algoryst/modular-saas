@@ -7,8 +7,10 @@ from django.views.generic import TemplateView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.authtoken.views import obtain_auth_token
 
+from apps.marketing.views import LandingView
+
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+    path("", LandingView.as_view(), name="home"),
     path(
         "about/",
         TemplateView.as_view(template_name="pages/about.html"),
@@ -20,7 +22,7 @@ urlpatterns = [
     path("users/", include("apps.accounts.urls", namespace="accounts")),
     path("accounts/", include("allauth.urls")),
     # Your stuff: custom urls includes go here
-    # ...
+    path("", include("apps.marketing.urls", namespace="marketing")),
     # Media files
     *static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT),
 ]

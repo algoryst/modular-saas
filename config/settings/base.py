@@ -93,6 +93,7 @@ THIRD_PARTY_APPS = [
     "allauth.mfa",
     "allauth.socialaccount",
     "django_celery_beat",
+    "django_ratelimit",
     "rest_framework",
     "rest_framework.authtoken",
     "corsheaders",
@@ -101,6 +102,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "apps.accounts",
+    "apps.marketing",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -370,3 +372,17 @@ SPECTACULAR_SETTINGS: dict[str, Any] = {
 }
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+# Waitlist (apps.marketing)
+# ------------------------------------------------------------------------------
+# Closed by default: the form must not collect emails before the legal notice and
+# privacy policy are published (docs/LEGAL.md Gate 1, items 4 and 5).
+WAITLIST_ENABLED = env.bool("WAITLIST_ENABLED", default=False)
+BREVO_API_KEY = env("BREVO_API_KEY", default="")
+BREVO_API_URL = env("BREVO_API_URL", default="https://api.brevo.com/v3/")
+BREVO_WAITLIST_LIST_SAAS = env.int("BREVO_WAITLIST_LIST_SAAS", default=0)
+BREVO_WAITLIST_LIST_BOILERPLATE = env.int("BREVO_WAITLIST_LIST_BOILERPLATE", default=0)
+BREVO_DOI_TEMPLATE_ID = env.int("BREVO_DOI_TEMPLATE_ID", default=0)
+# Absolute URL Brevo redirects to once the double opt-in link is clicked.
+WAITLIST_CONFIRMED_URL = env("WAITLIST_CONFIRMED_URL", default="")
+WAITLIST_RATE_LIMIT = env("WAITLIST_RATE_LIMIT", default="5/h")

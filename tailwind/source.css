@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@source "../apps/templates";
+@source "../apps/**/templates";
 
 /* Design tokens: docs/ARCHITECTURE.md section 10 (Zinc neutrals, Blue 600 primary,
    8 px radius = rounded-lg, one shadow level = shadow-sm). Inter is self-hosted in W7;

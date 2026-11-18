@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Legal notice" %}{% endblock title %}
+{% block content %}
+  {# PLACEHOLDER: fill every [..] value before setting WAITLIST_ENABLED (docs/LEGAL.md Gate 1, item 4). #}
+  <article class="max-w-2xl space-y-6 rounded-lg border border-zinc-200 bg-white p-6 shadow-sm">
+    <h1 class="text-2xl font-semibold">{% translate "Legal notice" %}</h1>
+    <section>
+      <h2 class="font-semibold">{% translate "Publisher" %}</h2>
+      <p class="mt-2 text-sm text-zinc-600">
+        {% translate "[Full name], individual entrepreneur (micro-entrepreneur)" %}
+        <br />
+        {% translate "Address: [business or domiciliation address]" %}
+        <br />
+        {% translate "Phone: [phone number]" %}
+        <br />
+        {% translate "Email: [contact email]" %}
+        <br />
+        {% translate "SIRET: [SIRET number]" %}
+      </p>
+    </section>
+    <section>
+      <h2 class="font-semibold">{% translate "Director of publication" %}</h2>
+      <p class="mt-2 text-sm text-zinc-600">{% translate "[Full name]" %}</p>
+    </section>
+    <section>
+      <h2 class="font-semibold">{% translate "Hosting" %}</h2>
+      <p class="mt-2 text-sm text-zinc-600">{% translate "[Host name, address and phone number]" %}</p>
+    </section>
+  </article>
+{% endblock content %}

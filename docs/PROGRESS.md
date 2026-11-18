@@ -33,7 +33,7 @@ Rule: work the first unchecked item. Tests with every item. Update the session l
 - [ ] One-page RGPD register spreadsheet (controller tab + sub-processor tab)
 - [x] Repo, cookiecutter, CI pipeline, pre-commit, coverage gates
 - [x] Claude Code guardrails: CLAUDE.md at root, `.claude/settings.json` + hooks (ENFORCEMENT.md), Makefile `make check`, `.importlinter`; run the day-one verification list (ENFORCEMENT.md §9)
-- [ ] Waitlist landing page
+- [x] Waitlist landing page
 
 ## Phase 1: Foundation (Weeks 1–8)
 
@@ -147,6 +147,7 @@ Signups, trial-to-paid %, MRR, churn, support hours per week, test coverage, CI 
 | 2026-11-18 | Early decisions applied: ATOMIC_REQUESTS off; `users` app renamed `accounts`; Bootstrap/crispy replaced by Tailwind (django-tailwind-cli, Tailwind 4.3.4 pinned), shared partials for fields, messages, buttons; WhiteNoise off in tests | Claude Code guardrails item; user to log decisions (allauth MFA, Tailwind CLI) in Decisions Log and ARCHITECTURE §2 |
 | 2026-11-18 | Guardrails: `.importlinter` (feature independence + layers, probed with a deliberate violation). Day-one checks: migration edit blocked ✅, .env read denied ✅, git push denied ✅, format hook ❌ (black not on PATH), Stop hook not wired (user decision) | User fixes format.py and wires Stop hook, then tick the guardrails box; next: Waitlist landing page / Phase 1 W1 core |
 | 2026-11-18 | Guardrails re-verified live in a fresh session: guard_paths blocks `.claude/hooks/` write ✅, format hook reformats .py via uv ✅, stop_check fails `make check` on a probe type error ✅ and passes on a clean tree ✅; `make check` green. Guardrails box ticked | Waitlist landing page (plan + approval first) |
+| 2026-11-18 | Waitlist landing page: `apps.marketing` (JoinWaitlist + SubscribeToWaitlist services, Brevo double opt-in adapter, Celery task with retry on transient errors, django-ratelimit per IP, honeypot); two-product landing at `home`; stub legal notice + privacy pages linked in footer; `WAITLIST_ENABLED` off by default; fr translations complete; exercised over HTTP (closed + open, form → redirect → task). Visual browser check not done (Chrome extension unavailable) | User: fill legal placeholders, create Brevo lists + DOI template, set env, then flip `WAITLIST_ENABLED`; next dev item: Phase 1 W1 core |
 
 ## Session Starter Prompt
 
