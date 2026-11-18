@@ -1,0 +1,51 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Edit(./.env)",
+      "Edit(./.env.*)",
+      "Bash(git push*)",
+      "Bash(git reset --hard*)",
+      "Bash(git clean*)",
+      "Bash(rm -rf*)",
+      "Bash(*delete_tenant*)",
+      "Bash(*DROP SCHEMA*)",
+      "Bash(*dropdb*)",
+      "Bash(curl*|*sh*)"
+    ],
+    "ask": [
+      "Bash(pip install*)",
+      "Bash(pip uninstall*)",
+      "Bash(poetry add*)",
+      "Bash(uv add*)",
+      "Bash(npm install*)",
+      "Bash(git commit*)",
+      "Edit(./.github/**)",
+      "Edit(./Dockerfile*)",
+      "Edit(./docker-compose*)",
+      "Edit(./pyproject.toml)",
+      "Edit(./.importlinter)",
+      "Edit(./Makefile)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          { "type": "command", "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/guard_paths.py\"" }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          { "type": "command", "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/format.py\"" }
+        ]
+      }
+    ],
+  }
+}
