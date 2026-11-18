@@ -21,8 +21,12 @@ services:
         required: false
       - path: ./.envs/.local/.postgres
         required: false
+    environment:
+      # DEBUGPY=1 make up: run Django under debugpy (VS Code "Attach to Django").
+      DEBUGPY: ${DEBUGPY:-0}
     ports:
       - '8000:8000'
+      - '5678:5678'
     command: /start
 
   postgres:
@@ -37,6 +41,9 @@ services:
     env_file:
       - path: ./.envs/.local/.postgres
         required: false
+    ports:
+      # 5433 on the Mac (DBeaver etc.): 5432 may already be a local Postgres.
+      - '5433:5432'
 
   mailpit:
     image: docker.io/axllent/mailpit:latest

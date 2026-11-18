@@ -1,4 +1,4 @@
-.PHONY: check fmt lint types security django-check migrate migrations-check test test-one up down build messages css
+.PHONY: check fmt lint types security django-check migrate migrations-check test test-one debug-test up down build messages css
 
 COMPOSE := docker compose -f docker-compose.local.yml
 RUN := $(COMPOSE) run --rm django
@@ -40,6 +40,10 @@ test:
 
 test-one:
 	$(RUN) pytest -p no:sugar $(T)
+
+# Waits for VS Code "Debug a test" to attach on port 5679, then runs T.
+debug-test:
+	$(COMPOSE) run --rm -p 5679:5679 django python -Xfrozen_modules=off -m debugpy --listen 0.0.0.0:5679 --wait-for-client -m pytest -p no:sugar $(T)
 
 up:
 	$(COMPOSE) up -d --remove-orphans

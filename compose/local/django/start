@@ -7,4 +7,9 @@ set -o nounset
 
 # Shared schema first, then every workspace schema (django-tenants).
 python manage.py migrate_schemas
+if [ "${DEBUGPY:-0}" = "1" ]; then
+  # Breakpoints from VS Code ("Attach to Django", port 5678). debugpy follows the
+  # reloader's child process, so edits still reload.
+  exec python -Xfrozen_modules=off -m debugpy --listen 0.0.0.0:5678 manage.py runserver_plus 0.0.0.0:8000
+fi
 exec python manage.py runserver_plus 0.0.0.0:8000

@@ -33,6 +33,7 @@ data lives only in workspace schemas.
 | `http://<slug>.localhost:8000` | A workspace. Chrome and Firefox resolve `*.localhost`; for Safari add the host to `/etc/hosts` |
 | http://localhost:8000/admin/ | Django admin (local URL; production uses `DJANGO_ADMIN_URL`) |
 | http://localhost:8025 | Mailpit: every email the app sends (verification codes, resets) |
+| localhost:5433 | Postgres for a database client (see section 3) |
 | http://localhost:5555 | Flower: Celery tasks (`CELERY_FLOWER_USER` / `_PASSWORD` from `.envs/.local/.django`) |
 
 Stop with `make down`.
@@ -74,6 +75,34 @@ on the host through `uv`.
 
 Run a shell: `docker compose -f docker-compose.local.yml run --rm django python manage.py shell`.
 Database: `docker compose -f docker-compose.local.yml exec postgres psql -U <POSTGRES_USER> <POSTGRES_DB>`.
+
+### Database client (DBeaver, TablePlus, pgAdmin)
+
+Postgres is published on **localhost:5433** (not 5432, so it never clashes with a Postgres
+installed on your machine).
+
+| Field | Value |
+|---|---|
+| Host / port | `localhost` / `5433` |
+| Database, user, password | `POSTGRES_DB`, `POSTGRES_USER`, `POSTGRES_PASSWORD` from `.envs/.local/.postgres` |
+
+Each workspace is a schema: `public` holds workspaces, domains, users and memberships;
+`ws_<slug>` holds that workspace's business data. In DBeaver, enable *Show all schemas*
+on the connection. Read freely; change data through the app or the shell, so services,
+events and the audit trail stay consistent.
+
+### Breakpoints in VS Code
+
+Install the *Python Debugger* extension. Configurations live in `.vscode/launch.json`.
+
+- **The running app:** `DEBUGPY=1 make up`, then Run and Debug → *Attach to Django
+  (Docker)*. Set breakpoints and load a page. Code edits still auto-reload. Back to normal:
+  `make up`.
+- **One test:** `make debug-test T=apps/tenants/tests/test_services.py::TestCreateTenant`,
+  which waits until you start *Debug a test (Docker)*, then runs.
+
+Breakpoints not hit: check the configuration's path mapping (`/app` in the container is the
+repo root), and that you attached after the server printed its start-up lines.
 
 ## 4. Project rules in one minute
 
